@@ -1,4 +1,5 @@
 import tweepy
+from tweepy.auth import OAuthHandler
 
 # Generate your own keys from your twitter devoloper account 
 ACCESS_TOKEN = '2468043158-vIq9XqpHyvaReVWnhctdmrvKKjHz0CKtsYuvotf'
@@ -27,4 +28,4 @@ for tweet in public_tweets:
 
 
 
-# fetch and add the tweets to a file
+# fetch and add the tweets to a file -- next task
