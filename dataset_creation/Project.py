@@ -2,10 +2,10 @@ import tweepy
 from tweepy.auth import OAuthHandler
 
 # Generate your own keys from your twitter devoloper account 
-ACCESS_TOKEN = '2468043158-vIq9XqpHyvaReVWnhctdmrvKKjHz0CKtsYuvotf'
-ACCESS_SECRET = '5pP8dNXeF0XkcFui528TesCd8wb0T1tipAR1aaBhTAAtM'
-CONSUMER_KEY = 'uBEuVSDAoXWYw3Z7VAjGLtdXj'
-CONSUMER_SECRET = 'UfC7b5ACaN2sXp00GofBxz4Eq04kSc5UmUw9RR9m3myDPNN9G7'
+ACCESS_TOKEN = ''
+ACCESS_SECRET = ''
+CONSUMER_KEY = ''
+CONSUMER_SECRET = ''
 
 
 # Setup access to API
