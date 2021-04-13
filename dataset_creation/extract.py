@@ -77,7 +77,6 @@ tweetFormat = [["Geo","Tweet","Username","Location","Followees","Followers","No 
 
 # Looping to find User Details and Data to be extracted
 for tweet in tweets:
-    getAccountInfo(tweet.user.screen_name)
     tweetDetails.append([tweet.geo, tweet.text, tweet.user.screen_name, tweet.user.location, api.get_user(tweet.user.screen_name).friends_count, api.get_user(tweet.user.screen_name).followers_count, api.get_user(tweet.user.screen_name).statuses_count, getAccountInfo(tweet.user.screen_name)])
 
 # Creating a CSV file of extracted data
