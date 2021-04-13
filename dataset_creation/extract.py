@@ -9,24 +9,21 @@ from textblob import TextBlob
 
 
 def getAccountInfo(username):
-    print("Analysing "+username)
+    print("\nAnalysing @" + username + "\n")
     hashtags = []
     mentions = []
+    userMentions = 0
     tweet_count = 0
-    tweetsToAnalyse = 10
+    tweetsToAnalyse = 1000
     end_date = datetime.utcnow() - timedelta(days=365)
     for status in tw.Cursor(api.user_timeline, id=username).items(tweetsToAnalyse):
         tweet_count += 1
+        print("Number of tweets analysed = ", tweet_count, end="\r")
         if hasattr(status, "entities"):
             entities = status.entities
-        if "hashtags" in entities:
-            for ent in entities["hashtags"]:
-                if ent is not None:
-                    if "text" in ent:
-                        hashtag = ent["text"]
-                    if hashtag is not None:
-                        hashtags.append(hashtag)
         if "user_mentions" in entities:
+            if(entities["user_mentions"] != []):
+                userMentions += 1
             for ent in entities["user_mentions"]:
                 if ent is not None:
                     if "screen_name" in ent:
@@ -36,70 +33,58 @@ def getAccountInfo(username):
         if status.created_at < end_date:
             break
 
-    print("Most mentioned Twitter users:")
-    for item, count in Counter(mentions).most_common(10):
-        print(item + "\t" + str(count))
+    print("\nUser mentions: " + str(userMentions))
+    print("\nProcessed " + str(tweet_count) + " tweets from @" + username)
 
-    print
-    print("Most used hashtags:")
-    for item, count in Counter(hashtags).most_common(10):
-        print(item + "\t" + str(count))
-
-    print
-    print("Processed " + str(tweet_count) + " tweets from @" + username)
-
-    item = api.get_user(username)
-    # print(item)
-    print("name: " + item.name)
-    print("screen_name: " + item.screen_name)
-    print("description: " + item.description)
-    print("statuses_count: " + str(item.statuses_count))
-    print("friends_count: " + str(item.friends_count))
-    print("followers_count: " + str(item.followers_count))
-
-    return([item.statuses_count, item.friends_count, item.followers_count])
+    return userMentions
 
 
-def checkPositivity(username):
+def checkPositivity(tweet):
     blob = TextBlob(tweet)
     for sentence in blob.sentences:
-        print(sentence.sentiment.polarity)
-
-
-usersList = []
-
-access_token = '1278165229004718081-62nBSL0dv4OU37xXTCltoz9Bk4sg1L'
-access_token_secret = 'UFaQpIgzs1cz7zxIB3TfEcopghUIAzg5uFyDobY4iuwbn'
-api_key = 'NpZucVrr5mQcn8CPlvKU5N3vu' 
-api_secret_key = '6NHnCH3gtbud8b9z5a1mh6WOgxbw1RU3FBOrjxQXdKIKphPcxz'
+        return sentence.sentiment.polarity
 
 
 # Authentication
-auth = tw.OAuthHandler(api_key,api_secret_key) 
-auth.set_access_token(access_token,access_token_secret) 
-api = tw.API(auth,wait_on_rate_limit=True)
+def apiAuth():
+    accessToken = '1278165229004718081-62nBSL0dv4OU37xXTCltoz9Bk4sg1L'
+    accessTokenSecret = 'UFaQpIgzs1cz7zxIB3TfEcopghUIAzg5uFyDobY4iuwbn'
+    apiKey = 'NpZucVrr5mQcn8CPlvKU5N3vu' 
+    apiSecretKey = '6NHnCH3gtbud8b9z5a1mh6WOgxbw1RU3FBOrjxQXdKIKphPcxz'
+
+    auth = tw.OAuthHandler(apiKey,apiSecretKey) 
+    auth.set_access_token(accessToken,accessTokenSecret) 
+    api = tw.API(auth,wait_on_rate_limit=True)
+    return api
+
+usersList = []
+tweetDetails = []
+api = apiAuth()
+tweetsFetched = 0
+
 
 # Data extraction details
-search_word = 'life' 
-date_since = '2020-04-01'
-no_of_tweets = 10
-tweets = tw.Cursor(api.search,q = search_word, lang ='en',since = date_since).items(no_of_tweets)
+searchWord = 'life' 
+dateSince = '2020-04-01'
+noOfTweets = 1
 
-# Format of the tweet in the CSV
-tweetFormat = [["Geo","Tweet","Username","Location","Followees","Followers","No of posts"]]
+print("\nExtracting tweets....")
 
-# Data to be extracted
-tweet_details = [[tweet.geo,tweet.text,tweet.user.screen_name,tweet.user.location, api.get_user(tweet.user.screen_name).friends_count, api.get_user(tweet.user.screen_name).followers_count, api.get_user(tweet.user.screen_name).statuses_count]for tweet in tweets]
+tweets = tw.Cursor(api.search,q = searchWord, lang ='en',since = dateSince).items(noOfTweets)
 
-print(tweet_details)
+# Format of the tweet and details in the CSV file
+tweetFormat = [["Geo","Tweet","Username","Location","Followees","Followers","No of posts", "User Mentions"]]
 
-# for tweet in tweet_details:
-#     tweet.append(getAccountInfo(tweet[2]))
-#     print(tweet)
-
+# Looping to find User Details and Data to be extracted
+for tweet in tweets:
+    getAccountInfo(tweet.user.screen_name)
+    tweetDetails.append([tweet.geo, tweet.text, tweet.user.screen_name, tweet.user.location, api.get_user(tweet.user.screen_name).friends_count, api.get_user(tweet.user.screen_name).followers_count, api.get_user(tweet.user.screen_name).statuses_count, getAccountInfo(tweet.user.screen_name)])
 
 # Creating a CSV file of extracted data
 with open("tweets_100.csv", "w+") as file:
+    print("\nWriting to CSV file...")
     writer = csv.writer(file, delimiter=',')
     writer.writerows(tweetFormat)
-    writer.writerows(tweet_details)
+    writer.writerows(tweetDetails)
+
+print("\nProcess completed successfully!")
