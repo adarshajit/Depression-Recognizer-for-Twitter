@@ -33,7 +33,7 @@ def getAccountInfo(username):
         if status.created_at < end_date:
             break
 
-    print("\nUser mentions: " + str(userMentions))
+    print("\n\nUser mentions: " + str(userMentions))
     print("\nProcessed " + str(tweet_count) + " tweets from @" + username)
 
     return userMentions
@@ -70,7 +70,7 @@ noOfTweets = 1
 
 print("\nExtracting tweets....")
 
-tweets = tw.Cursor(api.search,q = searchWord, lang ='en',since = dateSince).items(noOfTweets)
+tweets = tw.Cursor(api.search, q = 'searchWord -filter:retweets', lang ='en', since = dateSince).items(noOfTweets)
 
 # Format of the tweet and details in the CSV file
 tweetFormat = [["Geo","Tweet","Username","Location","Followees","Followers","No of posts", "User Mentions"]]
