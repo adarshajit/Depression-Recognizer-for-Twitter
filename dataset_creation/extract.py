@@ -67,7 +67,7 @@ def apiAuth():
     return api
 
 usersList = []
-tweetDetails = []
+tweetDetails = [["Geo", "Tweet", "Username", "Location", "Followees", "Followers", "No of posts", "User Mentions", "Avg Positivity", ""]] # Format of the tweet and details in the CSV file
 api = apiAuth()
 tweetsFetched = 0
 
@@ -81,9 +81,6 @@ print("\nExtracting tweets....")
 
 tweets = tw.Cursor(api.search, q = 'searchWord -filter:retweets', lang ='en', since = dateSince).items(noOfTweets)
 
-# Format of the tweet and details in the CSV file
-tweetFormat = [["Geo", "Tweet", "Username", "Location", "Followees", "Followers", "No of posts", "User Mentions", "Avg Positivity", ""]]
-
 # Looping to find User Details and Data to be extracted
 for tweet in tweets:
     userMentions, avgPositivity = getAccountInfo(tweet.user.screen_name)
@@ -93,7 +90,6 @@ for tweet in tweets:
 with open("tweets_100.csv", "w+") as file:
     print("\nWriting to CSV file...")
     writer = csv.writer(file, delimiter=',')
-    writer.writerows(tweetFormat)
     writer.writerows(tweetDetails)
 
 print("\nProcess completed successfully!")
