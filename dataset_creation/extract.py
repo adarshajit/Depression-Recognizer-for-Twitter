@@ -3,9 +3,8 @@ import csv
 import json
 from datetime import datetime
 from datetime import timedelta
-from collections import Counter
 from tweepy.auth import OAuthHandler
-from textblob import TextBlob
+
 
 def readwords( filename ):
     f = open(filename)
@@ -30,6 +29,15 @@ def posNeg(paragraph):
 		    neg += 1
 	return pos,neg
 
+
+# Counts the number of words in tweet
+def countWords(tweet):
+	tweetList = tweet.split(" ")
+	return(len(tweetList))
+
+
+
+
 # Authentication
 def apiAuth():
 
@@ -44,14 +52,13 @@ def apiAuth():
     return api
 
 
-tweetDetails = [["Tweet", "Followees", "Followers", "No of posts", "Retweet count", "Favorite count", "Positive words", "Negative words", "Depression Level"]] # Format of the tweet and details in the CSV file
+tweetDetails = [["Tweet", "Followees", "Followers", "No of posts", "Retweet count", "Favorite count", "Positive words", "Negative words", "No: of Words"]] # Format of the tweet and details in the CSV file
 api = apiAuth()
 
 # Data extraction details
 searchWord = 'joy' or 'happy' or 'family' or 'peace'
 dateSince = '2020-04-01'
 noOfTweets = 10
-
 
 print("\nExtracting tweets....")
 
@@ -60,7 +67,8 @@ tweets = tw.Cursor(api.search, q = searchWord, lang ='en', exclude='retweets', s
 # Looping to find User Details and Data to be extracted
 for tweet in tweets:
 	pos, neg = posNeg(tweet.text)
-	tweetDetails.append([tweet.text, api.get_user(tweet.user.screen_name).friends_count, api.get_user(tweet.user.screen_name).followers_count, api.get_user(tweet.user.screen_name).statuses_count, tweet.retweet_count, tweet.favorite_count, pos, neg])
+	countOfWords = countWords(tweet.text)
+	tweetDetails.append([tweet.text, api.get_user(tweet.user.screen_name).friends_count, api.get_user(tweet.user.screen_name).followers_count, api.get_user(tweet.user.screen_name).statuses_count, tweet.retweet_count, tweet.favorite_count, pos, neg,countOfWords])
 
 # Creating a CSV file of extracted data
 with open("tweets_100.csv", "w+") as file:
