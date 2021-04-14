@@ -59,13 +59,16 @@ api = apiAuth()
 searchWord = 'joy' or 'happy' or 'family' or 'peace'
 dateSince = '2020-04-01'
 noOfTweets = 10
+tweetStatus = 0
 
-print("\nExtracting tweets....")
+print("\nExtracting tweets....\n")
 
 tweets = tw.Cursor(api.search, q = searchWord, lang ='en', exclude='retweets', since = dateSince).items(noOfTweets)
 
 # Looping to find User Details and Data to be extracted
 for tweet in tweets:
+	tweetStatus += 1
+	print("Progress: " + str(tweetStatus) + "/" + str(noOfTweets) + " tweets", end="\r")
 	pos, neg = posNeg(tweet.text)
 	countOfWords = countWords(tweet.text)
 	tweetDetails.append([tweet.text, api.get_user(tweet.user.screen_name).friends_count, api.get_user(tweet.user.screen_name).followers_count, api.get_user(tweet.user.screen_name).statuses_count, tweet.retweet_count, tweet.favorite_count, pos, neg,countOfWords])
