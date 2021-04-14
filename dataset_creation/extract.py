@@ -79,7 +79,7 @@ noOfTweets = 2
 
 print("\nExtracting tweets....")
 
-tweets = tw.Cursor(api.search, q = 'searchWord -filter:retweets', lang ='en', since = dateSince).items(noOfTweets)
+tweets = tw.Cursor(api.search, q = searchWord, exclude='retweets' lang ='en', since = dateSince).items(noOfTweets)
 
 # Looping to find User Details and Data to be extracted
 for tweet in tweets:
