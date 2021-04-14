@@ -7,51 +7,28 @@ from collections import Counter
 from tweepy.auth import OAuthHandler
 from textblob import TextBlob
 
+def readwords( filename ):
+    f = open(filename)
+    words = [ line.rstrip() for line in f.readlines()]
+    return words
 
-def getAccountInfo(username):
-
-    print("\nAnalysing @" + username + "\n")
-    hashtags = []
-    mentions = []
-    userMentions = 0
-    tweet_count = 0
-    tweetsToAnalyse = 1000
-    avgPositivity = 0
-
-
-    end_date = datetime.utcnow() - timedelta(days=365)
-    for status in tw.Cursor(api.user_timeline, id=username).items(tweetsToAnalyse):
-        tweet_count += 1
-        print("Number of tweets analysed = ", tweet_count, end="\r")
-        avgPositivity += checkPositivity(status.text)
-        if hasattr(status, "entities"):
-            entities = status.entities
-        if "user_mentions" in entities:
-            if(entities["user_mentions"] != []):
-                userMentions += 1
-            for ent in entities["user_mentions"]:
-                if ent is not None:
-                    if "screen_name" in ent:
-                        name = ent["screen_name"]
-                    if name is not None:
-                        mentions.append(name)
-        if status.created_at < end_date:
-            break
-
-    avgPositivity /= tweetsToAnalyse
-    print("\n\nAverage positivity of tweets: " + str(avgPositivity))
-    print("\nUser mentions: " + str(userMentions))
-    print("\nProcessed " + str(tweet_count) + " tweets from @" + username)
-
-    return userMentions, avgPositivity
-
-
-def checkPositivity(tweet):
-
-    blob = TextBlob(tweet)
-    for sentence in blob.sentences:
-        return sentence.sentiment.polarity
-
+def posNeg(paragraph):
+	positive = readwords('positive.txt')
+	negative = readwords('negative.txt')
+	punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+	no_punct = ""
+	for char in paragraph:
+	   if char not in punctuations:
+		   no_punct = no_punct + char		   
+	words=no_punct.split()
+	pos = 0
+	neg = 0
+	for w in words:
+		if w in positive:
+		    pos += 1
+		if w in negative:
+		    neg += 1
+	return pos,neg
 
 # Authentication
 def apiAuth():
@@ -66,25 +43,24 @@ def apiAuth():
     api = tw.API(auth,wait_on_rate_limit=True)
     return api
 
-usersList = []
-tweetDetails = [["Geo", "Tweet", "Username", "Location", "Followees", "Followers", "No of posts", "User Mentions", "Avg Positivity", ""]] # Format of the tweet and details in the CSV file
-api = apiAuth()
-tweetsFetched = 0
 
+tweetDetails = [["Tweet", "Followees", "Followers", "No of posts", "Retweet count", "Favorite count", "Positive words", "Negative words", "Depression Level"]] # Format of the tweet and details in the CSV file
+api = apiAuth()
 
 # Data extraction details
-searchWord = 'life' 
+searchWord = 'joy' or 'happy' or 'family' or 'peace'
 dateSince = '2020-04-01'
-noOfTweets = 2
+noOfTweets = 10
+
 
 print("\nExtracting tweets....")
 
-tweets = tw.Cursor(api.search, q = 'searchWord -filter:retweets', lang ='en', since = dateSince).items(noOfTweets)
+tweets = tw.Cursor(api.search, q = searchWord, lang ='en', exclude='retweets', since = dateSince).items(noOfTweets)
 
 # Looping to find User Details and Data to be extracted
 for tweet in tweets:
-    userMentions, avgPositivity = getAccountInfo(tweet.user.screen_name)
-    tweetDetails.append([tweet.geo, tweet.text, tweet.user.screen_name, tweet.user.location, api.get_user(tweet.user.screen_name).friends_count, api.get_user(tweet.user.screen_name).followers_count, api.get_user(tweet.user.screen_name).statuses_count, userMentions, avgPositivity])
+	pos, neg = posNeg(tweet.text)
+	tweetDetails.append([tweet.text, api.get_user(tweet.user.screen_name).friends_count, api.get_user(tweet.user.screen_name).followers_count, api.get_user(tweet.user.screen_name).statuses_count, tweet.retweet_count, tweet.favorite_count, pos, neg])
 
 # Creating a CSV file of extracted data
 with open("tweets_100.csv", "w+") as file:
