@@ -29,7 +29,8 @@ def posNeg(paragraph):
 def cleaning(tweet):
 	tweet = re.sub('@[\w]+','',tweet)
 	tweetCleaned = re.sub(r"http\S+", "", tweet)
-	return tweetCleaned
+	tweetWithoutSpChars = re.sub(r'[^\w\s]','',tweetCleaned)
+	return tweetWithoutSpChars
 
 # Counts the number of words in tweet
 def countWords(tweet):
@@ -54,7 +55,7 @@ api = apiAuth()
 
 # Data extraction details
 searchWord = 'motivation'
-noOfTweets = 10
+noOfTweets = 25
 tweetStatus = 0
 
 print("\nExtracting tweets....\n")
