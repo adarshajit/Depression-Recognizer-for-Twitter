@@ -54,7 +54,7 @@ tweetDetails = [["Tweet", "Followees", "Followers", "No of posts", "Retweet coun
 api = apiAuth()
 
 # Data extraction details
-searchWord = 'motivation'
+searchWord = "hopeless OR aching OR worthless OR useless OR stupid OR untethered OR adrift OR afraid"
 noOfTweets = 25
 tweetStatus = 0
 
