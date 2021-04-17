@@ -68,8 +68,10 @@ for tweet in tweets:
 	print("Progress: " + str(tweetStatus) + "/" + str(noOfTweets) + " tweets", end="\r")
 	pos, neg = posNeg(tweet.text)
 	countOfWords = countWords(tweet.text)
-	
-	tweetDetails.append([cleaning(tweet.text), api.get_user(tweet.user.screen_name).friends_count, api.get_user(tweet.user.screen_name).followers_count, api.get_user(tweet.user.screen_name).statuses_count, tweet.retweet_count, tweet.favorite_count, pos, neg, countOfWords])
+	try:
+		tweetDetails.append([cleaning(tweet.text), api.get_user(tweet.user.screen_name).friends_count, api.get_user(tweet.user.screen_name).followers_count, api.get_user(tweet.user.screen_name).statuses_count, tweet.retweet_count, tweet.favorite_count, pos, neg, countOfWords])
+	except:
+		print("Connection error occurred!\n\n")
 	
 	# Creating a CSV file of extracted data
 	with open("tweets_test.csv", "w+") as file:
