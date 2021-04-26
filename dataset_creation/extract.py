@@ -60,6 +60,9 @@ def stemmingLines(line):
   for w in words:
     output.append(ps.stem(w))
   return output
+  
+def toLowerCase(line):
+  return line.lower()
 
 # Authentication
 def apiAuth():
