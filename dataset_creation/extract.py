@@ -4,6 +4,7 @@ import re
 from tweepy.auth import OAuthHandler
 import nltk.tokenize
 from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
 
 def readwords( filename ):
     f = open(filename)
@@ -51,6 +52,14 @@ def stop_words(line):
 		if not i in swords: 
 			f.append(i)
 	return f
+
+def stemmingLines(line):  
+  ps = PorterStemmer()  
+  words = tokenize(line)
+  output=[]
+  for w in words:
+    output.append(ps.stem(w))
+  return output
 
 # Authentication
 def apiAuth():
