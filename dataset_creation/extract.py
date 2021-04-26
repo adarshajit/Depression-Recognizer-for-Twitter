@@ -2,6 +2,7 @@ import tweepy as tw
 import csv
 import re
 from tweepy.auth import OAuthHandler
+import nltk.tokenize
 
 def readwords( filename ):
     f = open(filename)
@@ -36,6 +37,9 @@ def cleaning(tweet):
 def countWords(tweet):
 	tweetList = tweet.split(" ")
 	return(len(tweetList))
+	
+def tokenize(line):
+	return nltk.tokenize.word_tokenize(line)
 
 # Authentication
 def apiAuth():
