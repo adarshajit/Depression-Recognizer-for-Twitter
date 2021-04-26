@@ -3,6 +3,7 @@ import csv
 import re
 from tweepy.auth import OAuthHandler
 import nltk.tokenize
+from nltk.corpus import stopwords
 
 def readwords( filename ):
     f = open(filename)
@@ -40,6 +41,16 @@ def countWords(tweet):
 	
 def tokenize(line):
 	return nltk.tokenize.word_tokenize(line)
+	
+def stop_words(line):
+	swords = set(stopwords.words('english')) 
+
+	words = line.split() 
+	f=[]
+	for i in words: 
+		if not i in swords: 
+			f.append(i)
+	return f
 
 # Authentication
 def apiAuth():
