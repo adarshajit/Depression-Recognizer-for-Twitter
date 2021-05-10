@@ -14,7 +14,7 @@ vectorizer = CountVectorizer()
 datasetReader = pd.read_json('./cleanedDataset.json')
 
 allFeatures = vectorizer.fit_transform(datasetReader.Tweet)
-xTrain, xTest, yTrain, yTest = train_test_split(allFeatures, datasetReader.Target, test_size = 0.3, random_state = 88)
+xTrain, xTest, yTrain, yTest = train_test_split(allFeatures, datasetReader.Depressed, test_size = 0.3, random_state = 88)
 
 classifier = MultinomialNB()
 classifier.fit(xTrain, yTrain)
