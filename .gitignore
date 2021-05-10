@@ -1,1 +1,10 @@
 __pycache__/
+tweets_100.csv
+depressedDataset1.csv
+depressedDataset2.csv
+mildDataset.csv
+nonDepressedDataset.csv
+tweets_md2.csv
+tweets_mild_depr1.csv
+tweets_test.csv
+entireDataset.csv
