@@ -9,17 +9,20 @@ The project works to develop a social media-based depression recognition tool us
 
 [Tweepy](https://www.tweepy.org/)
 
+[NLTK](https://www.nltk.org/)
 
-## Running the files
+[sklearn](https://scikit-learn.org/0.21/documentation.html)
 
-### extract.py
+
+## Running the programs
 
 pip install the following modules:
 
 - tweepy
 - textblob
+- nltk
+- numpy
+- pandas
+- sklearn
 
-Before running the program, download the following using Python shell:
-
-`import nltk`  
-`nltk.download('punkt')`
+Before running the cleaning program make sure to remove first person stop words from the stopwords list of NLTK.
