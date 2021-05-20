@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import recall_score, precision_score, f1_score
 from sklearn.metrics import precision_recall_fscore_support
-
+from sklearn import metrics
 
 vectorizer = CountVectorizer()
 
@@ -31,3 +31,12 @@ nr_incorrect = yTest.size - nr_correct
 precision, recall, fscore, support = precision_recall_fscore_support(yTest, classifier.predict(xTest), average=None, labels=[0,2,4])
 
 print("Recall = ", recall, " Precision = ", precision, " & F1 Score = ", fscore)
+
+yPred=classifier.predict(xTest)
+accuracy = metrics.accuracy_score(yTest, yPred)
+print("accuracy:   %0.3f" % accuracy)
+
+print(metrics.classification_report(yTest, yPred, target_names=['ND', 'D', 'HD']))
+
+print("Confusion Matrix:")
+print(metrics.confusion_matrix(yTest, yPred))
