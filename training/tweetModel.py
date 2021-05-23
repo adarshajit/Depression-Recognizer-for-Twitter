@@ -1,13 +1,14 @@
-import csv
-import numpy as np
 import pandas as pd
+import numpy as np
+import csv
 
+from sklearn.metrics import recall_score, precision_score, f1_score
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import recall_score, precision_score, f1_score
-from sklearn.metrics import precision_recall_fscore_support
+from yellowbrick.classifier import ROCAUC
 from sklearn import metrics
+
 
 vectorizer = CountVectorizer()
 
@@ -19,12 +20,11 @@ xTrain, xTest, yTrain, yTest = train_test_split(allFeatures, datasetReader.Depre
 classifier = MultinomialNB()
 classifier.fit(xTrain, yTrain)
 
-nr_correct = (yTest == classifier.predict(xTest)).sum()
-nr_incorrect = yTest.size - nr_correct
+visualizer = ROCAUC(classifier, encoder={0: 'Non Depressed', 2: 'Mildly Depressed', 4: 'Higly Depressed'})
 
-precision, recall, fscore, support = precision_recall_fscore_support(yTest, classifier.predict(xTest), average=None, labels=[0,2,4])
-
-print("Recall = ", recall, " Precision = ", precision, " & F1 Score = ", fscore)
+visualizer.fit(xTrain, yTrain)    
+visualizer.score(xTest, yTest)        
+visualizer.show()    
 
 yPred=classifier.predict(xTest)
 accuracy = metrics.accuracy_score(yTest, yPred)
