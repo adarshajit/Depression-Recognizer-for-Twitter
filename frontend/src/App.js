@@ -1,9 +1,12 @@
 import React from "react";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
     <>
-      <h1>Hello World</h1>
+      <Home />
+      <Dashboard />
     </>
   );
 };
