@@ -24,5 +24,6 @@ pip install the following modules:
 - numpy
 - pandas
 - sklearn
+- yellowbrick
 
 Before running the cleaning program make sure to remove first person stop words from the stopwords list of NLTK.
