@@ -16,7 +16,13 @@ The project works to develop a social media-based depression recognition tool us
 
 ## Running the programs
 
-pip install the following modules:
+When executing the programs for the first time, please install the packages using:
+ 
+```
+pip install -r requirements.txt
+```
+
+List of modules being installed:
 
 - tweepy
 - textblob
