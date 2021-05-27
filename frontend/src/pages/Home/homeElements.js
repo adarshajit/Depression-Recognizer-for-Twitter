@@ -1,13 +1,13 @@
 import styled from "styled-components";
+import { AiOutlineUser as User } from "react-icons/ai";
+import { FaSortAlphaDown as Keywords } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export const HomeWrapper = styled.div`
-  display: grid;
-  place-items: center;
-  height: 700px;
-  width: 100%;
+  margin-top: 120px;
 
   @media screen and (max-width: 768px) {
-    height: 1000px;
+    margin-top: 150px;
   }
 `;
 
@@ -19,17 +19,9 @@ export const H1 = styled.h1`
   align-self: center;
 
   font-size: 55px;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 72px;
-
-  background: linear-gradient(
-    109.6deg,
-    rgba(62, 161, 219, 1) 11.2%,
-    rgba(93, 52, 236, 1) 100.2%
-  );
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #1da1f2;
 
   @media screen and (max-width: 768px) {
     font-size: 30px;
@@ -43,18 +35,9 @@ export const P = styled.p`
   font-weight: 600;
   text-align: center;
   margin-bottom: 50px;
-  background: linear-gradient(
-    109.6deg,
-    rgba(62, 161, 219, 1) 11.2%,
-    rgba(93, 52, 236, 1) 100.2%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 
   @media screen and (max-width: 768px) {
     font-size: 18px;
-    white-space: nowrap;
-    margin-bottom: 20px;
   }
 `;
 
@@ -73,17 +56,64 @@ export const Box = styled.div`
   height: 270px;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2);
 
   &:hover {
     cursor: pointer;
-    transform: scale(1.03);
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 35px 45px rgba(0, 0, 0, 0.2);
+    border: 3px solid #1da1f2;
   }
 
   @media screen and (max-width: 768px) {
-    width: 201px;
-    height: 201px;
+    width: 280px;
+    height: 110px;
   }
+`;
+
+export const BoxItems = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: row;
+  }
+`;
+
+export const UserIcon = styled(User)`
+  margin: 60px 0 40px 0;
+  align-self: center;
+  font-size: 70px;
+  fill: #1da1f2;
+
+  @media screen and (max-width: 768px) {
+    margin: 30px 10px 0 40px;
+    font-size: 50px;
+  }
+`;
+
+export const KeyIcon = styled(Keywords)`
+  margin: 60px 0 40px 0;
+  align-self: center;
+  font-size: 70px;
+  fill: #1da1f2;
+
+  @media screen and (max-width: 768px) {
+    margin: 30px 10px 0 40px;
+    font-size: 50px;
+  }
+`;
+
+export const Text = styled.p`
+  font-size: 24px;
+  font-weight: 600;
+  align-self: center;
+  @media screen and (max-width: 768px) {
+    margin: 25px 0 0 30px;
+    font-size: 18px;
+  }
+`;
+
+export const LinkB = styled(Link)`
+  text-decoration: none;
+  color: #000;
 `;

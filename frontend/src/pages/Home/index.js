@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 import {
   H1,
   P,
@@ -7,20 +7,41 @@ import {
   HomeContainer,
   BoxGrid,
   Box,
+  BoxItems,
+  Text,
+  UserIcon,
+  LinkB,
+  KeyIcon,
 } from "./homeElements";
+
 const Home = () => {
   return (
     <>
       <HomeWrapper>
         <HomeContainer>
           <H1>Depression Recogniser</H1>
-          <P>Check the depression of the following</P>
+          <P>Check the presence of depression among the following</P>
           <BoxGrid>
-            <Link to="/user">
-              <Box></Box>
-            </Link>
-            <Box></Box>
-            <Box></Box>
+            <LinkB to="/user">
+              <Box>
+                <BoxItems>
+                  <UserIcon />
+                  <Text>Twitter User</Text>
+                </BoxItems>
+              </Box>
+            </LinkB>
+            <Box>
+              <BoxItems>
+                <UserIcon />
+                <Text>Tweet</Text>
+              </BoxItems>
+            </Box>
+            <Box>
+              <BoxItems>
+                <KeyIcon />
+                <Text>Keywords</Text>
+              </BoxItems>
+            </Box>
           </BoxGrid>
         </HomeContainer>
       </HomeWrapper>
