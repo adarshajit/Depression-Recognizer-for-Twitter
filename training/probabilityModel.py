@@ -12,14 +12,14 @@ from sklearn import metrics
 
 vectorizer = CountVectorizer()
 
-datasetReader = pd.read_csv('./smallDataset.csv')
-testdatasetReader = pd.read_csv('./testDataset.csv') #manually copy pasted data of 0, 2, and 4 separately
+datasetReader = pd.read_csv('./cleanedDataset.csv')
+# testdatasetReader = pd.read_csv('./testDataset.csv') #manually copy pasted data of 0, 2, and 4 separately
 
 df = pd.DataFrame(datasetReader)
-dt = pd.DataFrame(testdatasetReader)
+# dt = pd.DataFrame(testdatasetReader)
 
 allFeatures = vectorizer.fit_transform(datasetReader.Tweet)
-testFeatures = vectorizer.transform(testdatasetReader.Tweet)
+# testFeatures = vectorizer.transform(testdatasetReader.Tweet)
 
 xTrain, xTest, yTrain, yTest = train_test_split(allFeatures, datasetReader.Depressed, test_size = 0.3, random_state = 88)
 
@@ -36,40 +36,57 @@ classifier.fit(xTrain, yTrain)
 
 # print(test)
 
-yPred1=classifier.predict_proba(testFeatures) # Probability values of classifier with tweet only
+yPred1=classifier.predict_proba(xTest) # Probability values of classifier with tweet only
 
 
 X = np.asarray(df[['Followees', 'Followers', 'No of posts', 'Retweet count', 'Favorite count', 'Positive words', 'Negative words', 'No: of Words']])
 Y = np.asarray(df['Depressed'])
 
-test = np.asarray(dt[['Followees', 'Followers', 'No of posts', 'Retweet count', 'Favorite count', 'Positive words', 'Negative words', 'No: of Words']])
+# test = np.asarray(dt[['Followees', 'Followers', 'No of posts', 'Retweet count', 'Favorite count', 'Positive words', 'Negative words', 'No: of Words']])
 
 xTrain, xTest, yTrain, yTest = train_test_split(X, Y, test_size = 0.3, random_state = 88)
 
 classifier2 = MultinomialNB()
 classifier2.fit(xTrain, yTrain)
 
-yPred2=classifier2.predict_proba(test) # Probability values of classifier with activities only
+yPred2=classifier2.predict_proba(xTest) # Probability values of classifier with activities only
 
 pos = []
 
+weight = 0.1
 
 # Logarithmic addition for combining probabilities
 for i in range(len(yPred1)):
-    res = [np.exp(np.log(yPred1[i][0]) + np.log(yPred2[i][0])*0.2),np.exp(np.log(yPred1[i][1]) + np.log(yPred2[i][1])*0.2),np.exp(np.log(yPred1[i][2]) + np.log(yPred2[i][2])*0.2)]
+    res = [np.exp(np.log(yPred1[i][0]) + np.log(yPred2[i][0]+weight)),np.exp(np.log(yPred1[i][1]) + np.log(yPred2[i][1]+weight)),np.exp(np.log(yPred1[i][2]) + np.log(yPred2[i][2]+weight))]
     pos.append(res)
+
+tally = []
+
+# Adding the tally of resutls to a tally list
 
 for i in pos:
     if i[0] > i[1]:
         if i[0] > i[2]:
-            print("Not Depressed")
+            tally.append(0)
         else:
-            print("Highly Depressed")
+            tally.append(4)
     else:
         if i[1] > i[2]:
-            print("Mildly Depressed")
+            tally.append(2)
         else:
-            print("Highly Depressed")
+            tally.append(4)
+
+correct = 0
+
+# Manually checking for TN and TP
+
+for i,value in enumerate(yTest):
+    if value == tally[i]:
+        correct += 1
+
+accuracy = correct/len(yTest)
+
+print("Accuracy = ", accuracy)
 
 # accuracy = metrics.accuracy_score(yTest, yPred)
 # print("accuracy:   %0.3f" % accuracy)
