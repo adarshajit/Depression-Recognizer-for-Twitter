@@ -83,7 +83,7 @@ export const Box = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    width: 200px;
-    height: 200px;
+    width: 201px;
+    height: 201px;
   }
 `;
