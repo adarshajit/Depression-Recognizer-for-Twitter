@@ -9,7 +9,7 @@ git clone https://github.com/adarshajit/Quote-App.git
 2. Change the working directory
 
 ```bash
-cd Quote-App
+cd frontend
 ```
 
 3. Install dependencies
