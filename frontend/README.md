@@ -3,13 +3,13 @@
 1. Clone the repository
 
 ```bash
-git clone https://github.com/adarshajit/Quote-App.git
+git clone https://github.com/adarshajit/Depression-Recognizer-for-Twitter.git
 ```
 
 2. Change the working directory
 
 ```bash
-cd Quote-App
+cd frontend
 ```
 
 3. Install dependencies
