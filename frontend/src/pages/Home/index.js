@@ -12,6 +12,7 @@ import {
   UserIcon,
   LinkB,
   KeyIcon,
+  QuillIcon,
 } from "./homeElements";
 
 const Home = () => {
@@ -32,7 +33,7 @@ const Home = () => {
             </LinkB>
             <Box>
               <BoxItems>
-                <UserIcon />
+                <QuillIcon />
                 <Text>Tweet</Text>
               </BoxItems>
             </Box>
