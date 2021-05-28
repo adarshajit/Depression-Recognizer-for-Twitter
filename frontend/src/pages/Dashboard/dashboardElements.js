@@ -17,9 +17,35 @@ export const Container = styled.div`
 
 export const TopWrapper = styled.div`
   height: 100px;
-  background-color: #5e5e5e;
   display: grid;
   grid-template-columns: 1fr 1fr;
+`;
+
+export const H1 = styled.h1`
+  font-size: 24px;
+  font-weight: 700;
+  @media screen and (max-width: 768px) {
+    font-size: 20px;
+  }
+`;
+export const P1 = styled.p`
+  font-size: 18px;
+  font-weight: 400;
+  @media screen and (max-width: 768px) {
+    font-size: 17px;
+  }
+`;
+
+export const P2 = styled.p`
+  margin: 15px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  font-size: 32px;
+  font-weight: 700;
+  @media screen and (max-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
 export const TwitterHandle = styled.div`
@@ -38,18 +64,53 @@ export const DateWrapper = styled.div`
 
 export const MainWrapper = styled.div`
   display: grid;
+  margin: 20px 0 0 0;
   grid-template-columns: 1fr 1fr;
+  place-items: center;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     grid-template-columns: 1fr;
+    grid-gap: 10px;
   }
 `;
 
 export const AccountInfo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 550px;
+  width: 600px;
   height: 550px;
-  margin: 30px 10px 0 70px;
-  background-color: wheat;
+  background-color: #99ebff;
+  border-radius: 10px;
+
+  @media screen and (max-width: 768px) {
+    width: 500px;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 360px;
+  }
+  @media screen and (max-width: 359px) {
+    width: 280px;
+  }
+`;
+
+export const Details = styled.div`
+  margin: 20px 0 0 0;
+  width: 500px;
+  height: 450px;
+  background-color: #fff;
+  align-self: center;
+  border-radius: 10px;
+
+  @media screen and (max-width: 768px) {
+    width: 470px;
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 300px;
+  }
+
+  @media screen and (max-width: 360px) {
+    width: 250px;
+  }
 `;

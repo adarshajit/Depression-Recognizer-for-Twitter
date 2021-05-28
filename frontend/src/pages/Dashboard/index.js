@@ -3,10 +3,14 @@ import {
   MainContainer,
   Container,
   TopWrapper,
+  H1,
+  P1,
+  P2,
   TwitterHandle,
   DateWrapper,
   MainWrapper,
   AccountInfo,
+  Details,
 } from "./dashboardElements";
 
 import Sidebar from "../../components/Sidebar";
@@ -18,22 +22,23 @@ const Dashboard = () => {
         <Container>
           <TopWrapper>
             <TwitterHandle>
-              <h1>Adarsh Ajit</h1>
-              <h4>@AdarshAjit</h4>
+              <H1>Adarsh Ajit</H1>
+              <P1>@AdarshAjit</P1>
             </TwitterHandle>
 
             <DateWrapper>
-              <h4>Sunday</h4>
-              <h1>28 May 2021</h1>
+              <P1>Sunday</P1>
+              <H1>28 May 2021</H1>
             </DateWrapper>
           </TopWrapper>
 
           <MainWrapper>
             <AccountInfo>
-              <h1>Account Summary</h1>
+              <P2>Account Summary</P2>
+              <Details></Details>
             </AccountInfo>
             <AccountInfo>
-              <h1>Recent Tweets</h1>
+              <P2>Recent Tweets</P2>
             </AccountInfo>
           </MainWrapper>
         </Container>
