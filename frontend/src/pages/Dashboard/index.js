@@ -5,15 +5,12 @@ import {
   TopWrapper,
   H1,
   P1,
-  P2,
   TwitterHandle,
   DateWrapper,
-  MainWrapper,
-  AccountInfo,
-  Details,
 } from "./dashboardElements";
 
 import Sidebar from "../../components/Sidebar";
+import UserInfo from "./UserInfo";
 const Dashboard = () => {
   return (
     <>
@@ -32,15 +29,22 @@ const Dashboard = () => {
             </DateWrapper>
           </TopWrapper>
 
-          <MainWrapper>
+          <UserInfo />
+
+          {/* <MainWrapper>
             <AccountInfo>
               <P2>Account Summary</P2>
               <Details></Details>
             </AccountInfo>
-            <AccountInfo>
-              <P2>Recent Tweets</P2>
-            </AccountInfo>
-          </MainWrapper>
+            <TweetWrapper>
+              <RecentTweets>
+                <P2>Recent Tweets</P2>
+              </RecentTweets>
+              <Analytics>
+                <P2>Analytics</P2>
+              </Analytics>
+            </TweetWrapper>
+          </MainWrapper> */}
         </Container>
       </MainContainer>
     </>
