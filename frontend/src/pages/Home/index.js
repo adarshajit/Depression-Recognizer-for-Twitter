@@ -23,7 +23,7 @@ const Home = () => {
           <H1>Depression Recogniser</H1>
           <P>Check the presence of depression among the following</P>
           <BoxGrid>
-            <LinkB to="/user">
+            <LinkB to="/twitterHandle">
               <Box>
                 <BoxItems>
                   <UserIcon />
@@ -31,18 +31,22 @@ const Home = () => {
                 </BoxItems>
               </Box>
             </LinkB>
-            <Box>
-              <BoxItems>
-                <QuillIcon />
-                <Text>Tweet</Text>
-              </BoxItems>
-            </Box>
-            <Box>
-              <BoxItems>
-                <KeyIcon />
-                <Text>Keywords</Text>
-              </BoxItems>
-            </Box>
+            <LinkB to="/tweet">
+              <Box>
+                <BoxItems>
+                  <QuillIcon />
+                  <Text>Tweet</Text>
+                </BoxItems>
+              </Box>
+            </LinkB>
+            <LinkB to="/keywords">
+              <Box>
+                <BoxItems>
+                  <KeyIcon />
+                  <Text>Keywords</Text>
+                </BoxItems>
+              </Box>
+            </LinkB>
           </BoxGrid>
         </HomeContainer>
       </HomeWrapper>

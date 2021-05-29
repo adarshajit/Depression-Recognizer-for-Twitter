@@ -6,17 +6,21 @@ import {
   RecentTweets,
   Data,
   OtherData,
+  Number,
 } from "./UserElements";
 
 const UserInfo = () => {
   return (
     <>
       <GridContainer>
-        <AccountSummary>rr</AccountSummary>
-        <Data>6363</Data>
-        <RecentTweets>ww</RecentTweets>
+        <AccountSummary>AccountSummary</AccountSummary>
+        <Data>
+          <Number>23</Number>
+          <Number>23</Number>
+        </Data>
+        <RecentTweets>Recent Tweets</RecentTweets>
       </GridContainer>
-      <OtherData>2u2u</OtherData>
+      <OtherData>Analytics</OtherData>
     </>
   );
 };
