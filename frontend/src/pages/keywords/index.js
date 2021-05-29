@@ -7,24 +7,32 @@ import {
   Form,
   Input,
   Button,
+  Display,
+  Logo,
 } from "./KeywordElements";
 import Banner from "../../assets/wallpaper.png";
+import { IconContext } from "react-icons/lib";
 
-const Keywords = () => {
+const Tweet = () => {
   return (
     <>
-      <GridContainer>
-        <Login>
-          <Form>
-            <P>Enter your Keyword</P>
-            <Input />
-            <Button>Submit</Button>
-          </Form>
-        </Login>
-        <Img src={Banner} alt="twitter banner" />
-      </GridContainer>
+      <IconContext.Provider value={{ color: "#fff" }}>
+        <GridContainer>
+          <Login>
+            <Form>
+              <P>Enter your Keyword</P>
+              <Input />
+              <Button>Submit</Button>
+            </Form>
+          </Login>
+          <Display>
+            <Img src={Banner} alt="twitter banner" />
+            <Logo />
+          </Display>
+        </GridContainer>
+      </IconContext.Provider>
     </>
   );
 };
 
-export default Keywords;
+export default Tweet;

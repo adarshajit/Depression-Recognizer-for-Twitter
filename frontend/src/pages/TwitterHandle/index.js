@@ -7,24 +7,32 @@ import {
   Form,
   Input,
   Button,
+  Display,
+  Logo,
 } from "./HandleElements";
 import Banner from "../../assets/wallpaper.png";
+import { IconContext } from "react-icons/lib";
 
-const UserId = () => {
+const TwitterHandle = () => {
   return (
     <>
-      <GridContainer>
-        <Login>
-          <Form>
-            <P>Enter your Twitter Handle</P>
-            <Input />
-            <Button>Submit</Button>
-          </Form>
-        </Login>
-        <Img src={Banner} alt="twitter banner" />
-      </GridContainer>
+      <IconContext.Provider value={{ color: "#fff" }}>
+        <GridContainer>
+          <Login>
+            <Form>
+              <P>Enter your Twitter Handle</P>
+              <Input />
+              <Button>Submit</Button>
+            </Form>
+          </Login>
+          <Display>
+            <Img src={Banner} alt="twitter banner" />
+            <Logo />
+          </Display>
+        </GridContainer>
+      </IconContext.Provider>
     </>
   );
 };
 
-export default UserId;
+export default TwitterHandle;
