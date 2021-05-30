@@ -160,7 +160,72 @@ def tweet(request):
 @api_view(('POST',))
 def keywords(request):
     keywords = request.POST.get('keywords')
-    res = {"message":keywords}
+    noOfTweets = int(request.POST.get('noOfTweets'))
+    tweetDetails = {'Tweet':{}, "Followees": {}, "Followers": {}, "No of posts": {}, "Retweet count": {}, "Favorite count": {}, "Positive words": {}, "Negative words": {}, "No: of Words": {}}
+    dataLists = [[] for i in range(9)]
+
+    tweets = tw.Cursor(api.search, q = keywords, lang ='en', exclude='retweets').items(noOfTweets)
+    
+    for i,tweet in enumerate(tweets):
+        pos, neg = posNeg(tweet.text)
+        countOfWords = countWords(tweet.text)
+        cleanedTweet = cleaning(tweet.text)
+        cleanedTweet = toLowerCase(cleanedTweet)
+        cleanedTweet = stop_words(cleanedTweet)
+        cleanedTweet = stemmingLines(cleanedTweet)
+
+        dataLists[1].append(api.get_user(tweet.user.screen_name).friends_count)
+        dataLists[2].append(api.get_user(tweet.user.screen_name).followers_count)
+        dataLists[3].append(api.get_user(tweet.user.screen_name).statuses_count)
+        dataLists[4].append(tweet.retweet_count)
+        dataLists[5].append(tweet.favorite_count)
+        dataLists[6].append(pos)
+        dataLists[7].append(neg)
+        dataLists[8].append(countOfWords)
+        dataLists[0].append(cleanedTweet)
+
+    tweetDetails['Tweet'] = dataLists[0]
+    tweetDetails['Followees'] = dataLists[1]
+    tweetDetails['Followers'] = dataLists[2]
+    tweetDetails['No of posts'] = dataLists[3]
+    tweetDetails['Retweet count'] = dataLists[4]
+    tweetDetails['Favorite count'] = dataLists[5]
+    tweetDetails['Positive words'] = dataLists[6]
+    tweetDetails['Negative words'] = dataLists[7]
+    tweetDetails['No: of Words'] = dataLists[8]
+
+    tweetClassifier, activityClassifier, testTweetFeature, Xt = training(tweetDetails)
+    prediction1 = tweetClassifier.predict_proba(testTweetFeature)
+    prediction2 = activityClassifier.predict_proba(Xt)
+
+    pos = []
+    weight = 0.1
+
+    # Logarithmic addition for combining probabilities
+    for i in range(len(prediction2)):
+        res = [np.exp(np.log(prediction1[i][0]) + np.log(prediction2[i][0]+weight)),np.exp(np.log(prediction1[i][1]) + np.log(prediction2[i][1]+weight)),np.exp(np.log(prediction1[i][2]) + np.log(prediction2[i][2]+weight))]
+        pos.append(res)
+
+    tally = []
+
+    # Adding the tally of resutls to a tally list
+
+    for i in pos:
+        if i[0] > i[1]:
+            if i[0] > i[2]:
+                tally.append(0)
+            else:
+                tally.append(4)
+        else:
+            if i[1] > i[2]:
+                tally.append(2)
+            else:
+                tally.append(4)
+
+    print(tally)
+
+
+    res = {"keywords":keywords, "noOfTweets":noOfTweets, "TweetDetails":tweetDetails}
     return Response(res)
 
 
