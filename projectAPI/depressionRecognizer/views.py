@@ -64,35 +64,7 @@ def username(request):
     tweetDetails['Negative words'] = dataLists[7]
     tweetDetails['No: of Words'] = dataLists[8]
 
-    tweetClassifier, activityClassifier, testTweetFeature, Xt = training(tweetDetails)
-    prediction1 = tweetClassifier.predict_proba(testTweetFeature)
-    prediction2 = activityClassifier.predict_proba(Xt)
-
-    pos = []
-    weight = 0.1
-
-    # Logarithmic addition for combining probabilities
-    for i in range(len(prediction1)):
-        res = [np.exp(np.log(prediction1[i][0]) + np.log(prediction2[i][0]+weight)),np.exp(np.log(prediction1[i][1]) + np.log(prediction2[i][1]+weight)),np.exp(np.log(prediction1[i][2]) + np.log(prediction2[i][2]+weight))]
-        pos.append(res)
-
-    tally = []
-
-    # Adding the tally of resutls to a tally list
-
-    for i in pos:
-        if i[0] > i[1]:
-            if i[0] > i[2]:
-                tally.append(0)
-            else:
-                tally.append(4)
-        else:
-            if i[1] > i[2]:
-                tally.append(2)
-            else:
-                tally.append(4)
-
-    print(tally)
+    training(tweetDetails)
 
     return Response(tweetDetails)
 
@@ -124,35 +96,7 @@ def tweet(request):
         tweetDetails['Negative words'] = neg
         tweetDetails['No: of Words'] = countOfWords
 
-    tweetClassifier, activityClassifier, testTweetFeature, Xt = training(tweetDetails)
-    prediction1 = tweetClassifier.predict_proba(testTweetFeature)
-    prediction2 = activityClassifier.predict_proba(Xt)
-
-    pos = []
-    weight = 0.1
-
-    # Logarithmic addition for combining probabilities
-    for i in range(len(prediction2)):
-        res = [np.exp(np.log(prediction1[i][0]) + np.log(prediction2[i][0]+weight)),np.exp(np.log(prediction1[i][1]) + np.log(prediction2[i][1]+weight)),np.exp(np.log(prediction1[i][2]) + np.log(prediction2[i][2]+weight))]
-        pos.append(res)
-
-    tally = []
-
-    # Adding the tally of resutls to a tally list
-
-    for i in pos:
-        if i[0] > i[1]:
-            if i[0] > i[2]:
-                tally.append(0)
-            else:
-                tally.append(4)
-        else:
-            if i[1] > i[2]:
-                tally.append(2)
-            else:
-                tally.append(4)
-
-    print(tally)
+    training(tweetDetails)
 
     res = {"tweet":tweet, "username":username, "tweetDetails":tweetDetails}
     return Response(res)
@@ -194,36 +138,7 @@ def keywords(request):
     tweetDetails['Negative words'] = dataLists[7]
     tweetDetails['No: of Words'] = dataLists[8]
 
-    tweetClassifier, activityClassifier, testTweetFeature, Xt = training(tweetDetails)
-    prediction1 = tweetClassifier.predict_proba(testTweetFeature)
-    prediction2 = activityClassifier.predict_proba(Xt)
-
-    pos = []
-    weight = 0.1
-
-    # Logarithmic addition for combining probabilities
-    for i in range(len(prediction2)):
-        res = [np.exp(np.log(prediction1[i][0]) + np.log(prediction2[i][0]+weight)),np.exp(np.log(prediction1[i][1]) + np.log(prediction2[i][1]+weight)),np.exp(np.log(prediction1[i][2]) + np.log(prediction2[i][2]+weight))]
-        pos.append(res)
-
-    tally = []
-
-    # Adding the tally of resutls to a tally list
-
-    for i in pos:
-        if i[0] > i[1]:
-            if i[0] > i[2]:
-                tally.append(0)
-            else:
-                tally.append(4)
-        else:
-            if i[1] > i[2]:
-                tally.append(2)
-            else:
-                tally.append(4)
-
-    print(tally)
-
+    training(tweetDetails)
 
     res = {"keywords":keywords, "noOfTweets":noOfTweets, "TweetDetails":tweetDetails}
     return Response(res)
@@ -311,4 +226,31 @@ def training(tweetDetails):
 
     activityClassifier.fit(X, Y)
 
-    return tweetClassifier, activityClassifier, testTweetFeature, Xt
+    prediction1 = tweetClassifier.predict_proba(testTweetFeature)
+    prediction2 = activityClassifier.predict_proba(Xt)
+
+    pos = []
+    weight = 0.1
+
+    # Logarithmic addition for combining probabilities
+    for i in range(len(prediction2)):
+        res = [np.exp(np.log(prediction1[i][0]) + np.log(prediction2[i][0]+weight)),np.exp(np.log(prediction1[i][1]) + np.log(prediction2[i][1]+weight)),np.exp(np.log(prediction1[i][2]) + np.log(prediction2[i][2]+weight))]
+        pos.append(res)
+
+    tally = []
+
+    # Adding the tally of resutls to a tally list
+
+    for i in pos:
+        if i[0] > i[1]:
+            if i[0] > i[2]:
+                tally.append(0)
+            else:
+                tally.append(4)
+        else:
+            if i[1] > i[2]:
+                tally.append(2)
+            else:
+                tally.append(4)
+
+    print(tally)
