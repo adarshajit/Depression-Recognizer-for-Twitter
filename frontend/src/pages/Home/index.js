@@ -15,10 +15,12 @@ import {
   QuillIcon,
 } from "./homeElements";
 
+import banner from "../../assets/bg2.webp";
+
 const Home = () => {
   return (
     <>
-      <HomeWrapper>
+      <HomeWrapper style={{ backgroundImage: `url(${banner})` }}>
         <HomeContainer>
           <H1>Depression Recogniser</H1>
           <P>Check the presence of depression among the following</P>

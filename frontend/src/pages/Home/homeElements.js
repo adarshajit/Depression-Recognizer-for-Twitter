@@ -6,11 +6,6 @@ import { Link } from "react-router-dom";
 
 export const HomeWrapper = styled.div`
   height: 100%;
-  background-image: linear-gradient(
-    179.4deg,
-    #fff 0.5%,
-    rgb(217, 244, 255) 100%
-  );
 `;
 
 export const HomeContainer = styled.div`
@@ -28,7 +23,7 @@ export const H1 = styled.h1`
   font-size: 50px;
   font-weight: 700;
   font-size: 72px;
-  color: #1da1f2;
+  color: #004563;
 
   @media screen and (max-width: 768px) {
     font-size: 34px;
@@ -67,13 +62,23 @@ export const BoxGrid = styled.div`
 export const Box = styled.div`
   width: 270px;
   height: 270px;
-  background-color: #fff;
-  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
   box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
 
   &:hover {
     cursor: pointer;
     border: 3px solid #1da1f2;
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
+    border-radius: 20px;
   }
 
   @media screen and (max-width: 768px) {
@@ -96,7 +101,7 @@ export const UserIcon = styled(User)`
   margin: 60px 0 40px 0;
   align-self: center;
   font-size: 70px;
-  fill: #1da1f2;
+  fill: #0074a6;
 
   @media screen and (max-width: 768px) {
     margin: 30px 10px 0 40px;
@@ -108,7 +113,7 @@ export const KeyIcon = styled(Keywords)`
   margin: 60px 0 40px 0;
   align-self: center;
   font-size: 70px;
-  fill: #1da1f2;
+  fill: #0074a6;
 
   @media screen and (max-width: 768px) {
     margin: 30px 10px 0 40px;
@@ -120,7 +125,7 @@ export const QuillIcon = styled(Quill)`
   margin: 60px 0 40px 0;
   align-self: center;
   font-size: 70px;
-  fill: #1da1f2;
+  fill: #0074a6;
 
   @media screen and (max-width: 768px) {
     margin: 30px 10px 0 40px;

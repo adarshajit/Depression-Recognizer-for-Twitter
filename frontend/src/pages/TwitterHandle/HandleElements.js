@@ -59,12 +59,13 @@ export const Display = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #239afb;
 `;
 export const Img = styled.img`
   width: 100%;
   height: 100%;
 `;
 export const Logo = styled(SiTwitter)`
-  font-size: 18rem;
+  font-size: 15rem;
   position: absolute;
 `;

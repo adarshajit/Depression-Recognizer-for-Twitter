@@ -2,7 +2,6 @@ import React from "react";
 import {
   GridContainer,
   Login,
-  Img,
   P,
   Form,
   Input,
@@ -10,7 +9,7 @@ import {
   Display,
   Logo,
 } from "./HandleElements";
-import Banner from "../../assets/wallpaper.png";
+
 import { IconContext } from "react-icons/lib";
 
 const TwitterHandle = () => {
@@ -26,7 +25,7 @@ const TwitterHandle = () => {
             </Form>
           </Login>
           <Display>
-            <Img src={Banner} alt="twitter banner" />
+            {/* <Img src={Banner} alt="twitter banner" /> */}
             <Logo />
           </Display>
         </GridContainer>

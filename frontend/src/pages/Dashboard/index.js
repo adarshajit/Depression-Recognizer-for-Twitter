@@ -28,23 +28,7 @@ const Dashboard = () => {
               <H1>28 May 2021</H1>
             </DateWrapper>
           </TopWrapper>
-
           <UserInfo />
-
-          {/* <MainWrapper>
-            <AccountInfo>
-              <P2>Account Summary</P2>
-              <Details></Details>
-            </AccountInfo>
-            <TweetWrapper>
-              <RecentTweets>
-                <P2>Recent Tweets</P2>
-              </RecentTweets>
-              <Analytics>
-                <P2>Analytics</P2>
-              </Analytics>
-            </TweetWrapper>
-          </MainWrapper> */}
         </Container>
       </MainContainer>
     </>
