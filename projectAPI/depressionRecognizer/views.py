@@ -19,7 +19,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn import metrics
 
-# Create your views here.
 
 accessToken = '2210845584-ChruE1rERcvIRGmVTqn3UDvLrW3h9hXtOodu9Ec'
 accessTokenSecret = '3WhULUNaC3Bw98t0osC0iVtYS99fI6Ktd0OozOevVnYD3'
@@ -75,9 +74,7 @@ def username(request):
     tweetFeature = vectorizer.fit_transform(datasetReader.Tweet)
     testTweetFeature = vectorizer.transform(tweetDetails['Tweet'])
 
-    xTrain, xTest, yTrain, yTest = train_test_split(tweetFeature, datasetReader.Depressed, test_size = 0.3, random_state = 88)
-
-    tweetClassifier.fit(xTrain, yTrain)
+    tweetClassifier.fit(tweetFeature, datasetReader.Depressed)
     prediction1 = tweetClassifier.predict_proba(testTweetFeature)
 
     X = np.asarray(df[['Followees', 'Followers', 'No of posts', 'Retweet count', 'Favorite count', 'Positive words', 'Negative words', 'No: of Words']])
@@ -87,9 +84,6 @@ def username(request):
     Xt = np.asarray([tweetDetails['Followees'],tweetDetails['Followers'],tweetDetails['No of posts'],tweetDetails['Retweet count'],tweetDetails['Favorite count'],tweetDetails['Positive words'],tweetDetails['Negative words'],tweetDetails['No: of Words']])
 
     Xt = Xt.transpose()
-    # Xt = np.reshape(-1, 1)
-
-    # print(X.shape, Xt.shape)
 
     activityClassifier.fit(X, Y)
     prediction2 = activityClassifier.predict_proba(Xt)
