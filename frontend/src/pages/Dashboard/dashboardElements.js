@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: row;
+  height: 100vh;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -13,6 +14,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100vh;
 `;
 
 export const TopWrapper = styled.div`
