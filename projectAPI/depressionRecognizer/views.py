@@ -64,28 +64,8 @@ def username(request):
     tweetDetails['Negative words'] = dataLists[7]
     tweetDetails['No: of Words'] = dataLists[8]
 
-    vectorizer = CountVectorizer(tokenizer=lambda doc: doc, lowercase=False)
-    tweetClassifier = MultinomialNB()
-    activityClassifier = MultinomialNB()
-
-    datasetReader = pd.read_csv(os.path.join(settings.BASE_DIR, 'cleanedDataset.csv'))
-    df = pd.DataFrame(datasetReader)
-
-    tweetFeature = vectorizer.fit_transform(datasetReader.Tweet)
-    testTweetFeature = vectorizer.transform(tweetDetails['Tweet'])
-
-    tweetClassifier.fit(tweetFeature, datasetReader.Depressed)
+    tweetClassifier, activityClassifier, testTweetFeature, Xt = training(tweetDetails)
     prediction1 = tweetClassifier.predict_proba(testTweetFeature)
-
-    X = np.asarray(df[['Followees', 'Followers', 'No of posts', 'Retweet count', 'Favorite count', 'Positive words', 'Negative words', 'No: of Words']])
-
-    Y = np.asarray(df['Depressed'])
-
-    Xt = np.asarray([tweetDetails['Followees'],tweetDetails['Followers'],tweetDetails['No of posts'],tweetDetails['Retweet count'],tweetDetails['Favorite count'],tweetDetails['Positive words'],tweetDetails['Negative words'],tweetDetails['No: of Words']])
-
-    Xt = Xt.transpose()
-
-    activityClassifier.fit(X, Y)
     prediction2 = activityClassifier.predict_proba(Xt)
 
     pos = []
@@ -119,7 +99,62 @@ def username(request):
 @api_view(('POST',))
 def tweet(request):
     tweet = request.POST.get('tweet')
-    res = {"message":tweet}
+    username = ''
+    tweetData = tw.Cursor(api.search, q = tweet, lang ='en', exclude='retweets').items(1)
+    tweetDetails = {'Tweet':{}, "Followees": {}, "Followers": {}, "No of posts": {}, "Retweet count": {}, "Favorite count": {}, "Positive words": {}, "Negative words": {}, "No: of Words": {}}
+    
+    for i in tweetData:
+        username = i.user.screen_name
+        tweet = i.text
+
+        pos, neg = posNeg(tweet)
+        countOfWords = countWords(tweet)
+        cleanedTweet = cleaning(tweet)
+        cleanedTweet = toLowerCase(cleanedTweet)
+        cleanedTweet = stop_words(cleanedTweet)
+        cleanedTweet = stemmingLines(cleanedTweet)
+
+        tweetDetails['Tweet'] = cleanedTweet
+        tweetDetails['Followees'] = api.get_user(username).friends_count
+        tweetDetails['Followers'] = api.get_user(username).followers_count
+        tweetDetails['No of posts'] = api.get_user(username).statuses_count
+        tweetDetails['Retweet count'] = i.retweet_count
+        tweetDetails['Favorite count'] = i.favorite_count
+        tweetDetails['Positive words'] = pos
+        tweetDetails['Negative words'] = neg
+        tweetDetails['No: of Words'] = countOfWords
+
+    tweetClassifier, activityClassifier, testTweetFeature, Xt = training(tweetDetails)
+    prediction1 = tweetClassifier.predict_proba(testTweetFeature)
+    prediction2 = activityClassifier.predict_proba(Xt)
+
+    pos = []
+    weight = 0.1
+
+    # Logarithmic addition for combining probabilities
+    for i in range(len(prediction2)):
+        res = [np.exp(np.log(prediction1[i][0]) + np.log(prediction2[i][0]+weight)),np.exp(np.log(prediction1[i][1]) + np.log(prediction2[i][1]+weight)),np.exp(np.log(prediction1[i][2]) + np.log(prediction2[i][2]+weight))]
+        pos.append(res)
+
+    tally = []
+
+    # Adding the tally of resutls to a tally list
+
+    for i in pos:
+        if i[0] > i[1]:
+            if i[0] > i[2]:
+                tally.append(0)
+            else:
+                tally.append(4)
+        else:
+            if i[1] > i[2]:
+                tally.append(2)
+            else:
+                tally.append(4)
+
+    print(tally)
+
+    res = {"tweet":tweet, "username":username, "tweetDetails":tweetDetails}
     return Response(res)
 
 @api_view(('POST',))
@@ -185,4 +220,30 @@ def countWords(tweet):
 	tweetList = tweet.split(" ")
 	return(len(tweetList))
 
-# def training():
+def training(tweetDetails):
+    vectorizer = CountVectorizer(tokenizer=lambda doc: doc, lowercase=False)
+    tweetClassifier = MultinomialNB()
+    activityClassifier = MultinomialNB()
+
+    datasetReader = pd.read_csv(os.path.join(settings.BASE_DIR, 'cleanedDataset.csv'))
+    df = pd.DataFrame(datasetReader)
+
+    tweetFeature = vectorizer.fit_transform(datasetReader.Tweet)
+    testTweetFeature = vectorizer.transform(tweetDetails['Tweet'])
+
+    tweetClassifier.fit(tweetFeature, datasetReader.Depressed)
+
+    X = np.asarray(df[['Followees', 'Followers', 'No of posts', 'Retweet count', 'Favorite count', 'Positive words', 'Negative words', 'No: of Words']])
+
+    Y = np.asarray(df['Depressed'])
+
+    Xt = np.asarray([tweetDetails['Followees'],tweetDetails['Followers'],tweetDetails['No of posts'],tweetDetails['Retweet count'],tweetDetails['Favorite count'],tweetDetails['Positive words'],tweetDetails['Negative words'],tweetDetails['No: of Words']])
+
+    if(Xt.ndim == 1):
+        Xt = Xt.reshape(1,-1)
+    else:
+        Xt = Xt.transpose()
+
+    activityClassifier.fit(X, Y)
+
+    return tweetClassifier, activityClassifier, testTweetFeature, Xt
