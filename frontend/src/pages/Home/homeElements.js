@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 
 export const HomeWrapper = styled.div`
   height: 100%;
+  background: #ccace6;
+  background: -webkit-linear-gradient(to bottom, #fff, #84daf9);
+  background: linear-gradient(to bottom, #fff, #84daf9);
 `;
 
 export const HomeContainer = styled.div`
@@ -23,7 +26,7 @@ export const H1 = styled.h1`
   font-size: 50px;
   font-weight: 700;
   font-size: 72px;
-  color: #004563;
+  color: #239afb;
 
   @media screen and (max-width: 768px) {
     font-size: 34px;
@@ -101,8 +104,7 @@ export const UserIcon = styled(User)`
   margin: 60px 0 40px 0;
   align-self: center;
   font-size: 70px;
-  fill: #0074a6;
-
+  fill: #397bd8;
   @media screen and (max-width: 768px) {
     margin: 30px 10px 0 40px;
     font-size: 50px;
@@ -113,7 +115,7 @@ export const KeyIcon = styled(Keywords)`
   margin: 60px 0 40px 0;
   align-self: center;
   font-size: 70px;
-  fill: #0074a6;
+  fill: #397bd8;
 
   @media screen and (max-width: 768px) {
     margin: 30px 10px 0 40px;
@@ -125,7 +127,7 @@ export const QuillIcon = styled(Quill)`
   margin: 60px 0 40px 0;
   align-self: center;
   font-size: 70px;
-  fill: #0074a6;
+  fill: #397bd8;
 
   @media screen and (max-width: 768px) {
     margin: 30px 10px 0 40px;
