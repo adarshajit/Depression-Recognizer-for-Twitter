@@ -13,12 +13,19 @@ import {
   LinkB,
   KeyIcon,
   QuillIcon,
+  Img1,
+  Img2,
+  Img3,
 } from "./homeElements";
-
+import balls1 from "../../assets/ball1.svg";
+import balls2 from "../../assets/ball2.svg";
 const Home = () => {
   return (
     <>
       <HomeWrapper>
+        <Img1 src={balls1} />
+        <Img2 src={balls2} />
+        <Img3 src={balls2} />
         <HomeContainer>
           <H1>Depression Recogniser</H1>
           <P>Check the presence of depression among the following</P>

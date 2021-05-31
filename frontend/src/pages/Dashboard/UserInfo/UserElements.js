@@ -4,14 +4,15 @@ export const GridContainer = styled.div`
   display: grid;
   margin: 10px;
   grid-gap: 40px;
+
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 `;
 
 export const AccountSummary = styled.div`
-  background-color: #f2be43;
-  border-radius: 10px;
   height: 400px;
-
+  background-color: #e1e8ed;
+  border-radius: 20px;
+  /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
   @media screen and (min-width: 1500px) {
     height: 650px;
   }
@@ -34,8 +35,12 @@ export const Data = styled.div`
 `;
 
 export const Number = styled.div`
-  background-color: #dee0ef;
-  border-radius: 10px;
+  background: #e6f4ff;
+  /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 20px;
+
   margin-bottom: 10px;
   height: 195px;
 
@@ -49,9 +54,12 @@ export const Number = styled.div`
 `;
 
 export const RecentTweets = styled.div`
-  background-color: #1f93ff;
   height: 400px;
-  border-radius: 10px;
+  background: rgba(74, 144, 226, 0.5);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
+  border-radius: 20px;
 
   @media screen and (min-width: 1500px) {
     height: 650px;
@@ -59,8 +67,8 @@ export const RecentTweets = styled.div`
 `;
 
 export const OtherData = styled.div`
-  background-color: #3cba78;
   margin: 10px;
+
   grid-column: 1/4;
   border-radius: 10px;
   max-height: 800px;
@@ -86,8 +94,11 @@ export const Box = styled.div`
   height: 100px;
   display: grid;
   place-items: center;
-  background-color: #29a267;
-  border-radius: 10px;
+  background: #fff;
+  /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 20px;
 
   @media screen and (max-width: 768px) {
     width: 350px;
@@ -115,6 +126,11 @@ export const BoxWrapper = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  /* background: #e6f4ff; */
+  background: #d4ecff;
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
+  border-radius: 20px;
 `;
 
 export const Sub = styled.p`
