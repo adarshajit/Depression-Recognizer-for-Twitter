@@ -1,0 +1,17 @@
+.slides {
+  width: 70%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+
+.tweet {
+  width: 70%;
+  height: 300px;
+  border-radius: 20px;
+  background-color: #fff;
+}

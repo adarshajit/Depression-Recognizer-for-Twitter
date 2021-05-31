@@ -5,9 +5,7 @@ import {
   AccountSummary,
   P,
   RecentTweets,
-  Data,
   OtherData,
-  Number,
   Box,
   P2,
   OtherWrapper,
@@ -19,6 +17,7 @@ import * as HiIcons from "react-icons/hi";
 import * as FaIcons from "react-icons/fa";
 import * as BiIcons from "react-icons/bi";
 import { IconContext } from "react-icons/lib";
+import TweetSlider from "../RecentTweets";
 
 const UserInfo = () => {
   return (
@@ -28,12 +27,10 @@ const UserInfo = () => {
           <AccountSummary>
             <P>Account Summary</P>
           </AccountSummary>
-          <Data>
-            <Number>23</Number>
-            <Number>23</Number>
-          </Data>
+
           <RecentTweets>
             <P>Recent Tweets</P>
+            <TweetSlider />
           </RecentTweets>
         </GridContainer>
         <OtherData>

@@ -25,33 +25,32 @@ export const P = styled.p`
   margin: 10px 0 0 10px;
 `;
 
-export const Data = styled.div`
-  border-radius: 10px;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  @media screen and (min-width: 1500px) {
-    height: 650px;
-  }
-`;
+// export const Data = styled.div`
+//   border-radius: 10px;
+//   display: grid;
+//   grid-template-rows: 1fr 1fr;
+//   @media screen and (min-width: 1500px) {
+//     height: 650px;
+//   }
+// `;
 
-export const Number = styled.div`
-  background: #e6f4ff;
-  /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border-radius: 20px;
+// export const Number = styled.div`
+//   background: #e6f4ff;
+//   backdrop-filter: blur(4px);
+//   -webkit-backdrop-filter: blur(4px);
+//   border-radius: 20px;
 
-  margin-bottom: 10px;
-  height: 195px;
+//   margin-bottom: 10px;
+//   height: 195px;
 
-  @media screen and (max-width: 768px) {
-    height: 140px;
-  }
+//   @media screen and (max-width: 768px) {
+//     height: 140px;
+//   }
 
-  @media screen and (min-width: 1500px) {
-    height: 320px;
-  }
-`;
+//   @media screen and (min-width: 1500px) {
+//     height: 320px;
+//   }
+// `;
 
 export const RecentTweets = styled.div`
   height: 400px;
