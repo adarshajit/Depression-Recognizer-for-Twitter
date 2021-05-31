@@ -33,6 +33,9 @@ api = tw.API(auth,wait_on_rate_limit=True)
 @api_view(('POST',))
 def username(request):
     username = request.POST.get('username')
+    tweetList = []
+    name = ''
+    profileImageURL = ''
     tweetDetails = {'Tweet':{}, "Followees": {}, "Followers": {}, "No of posts": {}, "Retweet count": {}, "Favorite count": {}, "Positive words": {}, "Negative words": {}, "No: of Words": {}}
     dataLists = [[] for i in range(9)]
     tweets = api.user_timeline(screen_name=username ,exclude_replies=True, include_rts=False, tweet_mode='extended')
@@ -43,6 +46,9 @@ def username(request):
         cleanedTweet = toLowerCase(cleanedTweet)
         cleanedTweet = stop_words(cleanedTweet)
         cleanedTweet = stemmingLines(cleanedTweet)
+        tweetList.append(tweet.full_text)
+        name = tweet.user.name
+        profileImageURL = tweet.user.profile_image_url_https
 
         dataLists[0].append(cleanedTweet)
         dataLists[1].append(api.get_user(username).friends_count)
@@ -64,20 +70,26 @@ def username(request):
     tweetDetails['Negative words'] = dataLists[7]
     tweetDetails['No: of Words'] = dataLists[8]
 
-    training(tweetDetails)
+    avg = training(tweetDetails)
 
-    return Response(tweetDetails)
+    res = {"name": name, "username":username, "profileImage": profileImageURL, "followees":tweetDetails['Followees'][0], "followers":tweetDetails['Followers'][0], "postCount":tweetDetails['No of posts'][0], "depLevel": avg, "tweets":tweetList}
+
+    return Response(res)
 
 @api_view(('POST',))
 def tweet(request):
     tweet = request.POST.get('tweet')
     username = ''
+    name = ''
+    profileImageURL = ''
     tweetData = tw.Cursor(api.search, q = tweet, lang ='en', exclude='retweets').items(1)
     tweetDetails = {'Tweet':{}, "Followees": {}, "Followers": {}, "No of posts": {}, "Retweet count": {}, "Favorite count": {}, "Positive words": {}, "Negative words": {}, "No: of Words": {}}
     
     for i in tweetData:
         username = i.user.screen_name
         tweet = i.text
+        name = i.user.name
+        profileImageURL = i.user.profile_image_url_https
 
         pos, neg = posNeg(tweet)
         countOfWords = countWords(tweet)
@@ -96,15 +108,17 @@ def tweet(request):
         tweetDetails['Negative words'] = neg
         tweetDetails['No: of Words'] = countOfWords
 
-    training(tweetDetails)
+    avg = training(tweetDetails)
 
-    res = {"tweet":tweet, "username":username, "tweetDetails":tweetDetails}
+    res = {"name": name, "username":username, "profileImage": profileImageURL, "followees":tweetDetails['Followees'], "followers":tweetDetails['Followers'], "postCount":tweetDetails['No of posts'], "tweet":tweet, "depLevel": avg}
     return Response(res)
 
 @api_view(('POST',))
 def keywords(request):
     keywords = request.POST.get('keywords')
-    noOfTweets = int(request.POST.get('noOfTweets'))
+    # noOfTweets = int(request.POST.get('noOfTweets'))
+    noOfTweets = 5
+    tweetList = []
     tweetDetails = {'Tweet':{}, "Followees": {}, "Followers": {}, "No of posts": {}, "Retweet count": {}, "Favorite count": {}, "Positive words": {}, "Negative words": {}, "No: of Words": {}}
     dataLists = [[] for i in range(9)]
 
@@ -117,6 +131,8 @@ def keywords(request):
         cleanedTweet = toLowerCase(cleanedTweet)
         cleanedTweet = stop_words(cleanedTweet)
         cleanedTweet = stemmingLines(cleanedTweet)
+
+        tweetList.append(tweet.text)
 
         dataLists[1].append(api.get_user(tweet.user.screen_name).friends_count)
         dataLists[2].append(api.get_user(tweet.user.screen_name).followers_count)
@@ -138,9 +154,9 @@ def keywords(request):
     tweetDetails['Negative words'] = dataLists[7]
     tweetDetails['No: of Words'] = dataLists[8]
 
-    training(tweetDetails)
+    avg = training(tweetDetails)
 
-    res = {"keywords":keywords, "noOfTweets":noOfTweets, "TweetDetails":tweetDetails}
+    res = {"keywords":keywords, "noOfTweets":noOfTweets, "Tweets":tweetList , "depLevel": avg}
     return Response(res)
 
 
@@ -254,3 +270,12 @@ def training(tweetDetails):
                 tally.append(4)
 
     print(tally)
+
+    avg = 0
+
+    for i in tally:
+        avg += i
+
+    avg = avg/len(tally)
+
+    return avg
