@@ -29,6 +29,26 @@ auth = tw.OAuthHandler(apiKey,apiSecretKey)
 auth.set_access_token(accessToken,accessTokenSecret) 
 api = tw.API(auth,wait_on_rate_limit=True)
 
+vectorizer = CountVectorizer(tokenizer=lambda doc: doc, lowercase=False)
+tweetClassifier = MultinomialNB()
+activityClassifier = MultinomialNB()
+
+datasetReader = pd.read_csv(os.path.join(settings.BASE_DIR, 'cleanedDataset.csv'))
+df = pd.DataFrame(datasetReader)
+
+tweetFeature = vectorizer.fit_transform(datasetReader.Tweet)
+
+X = np.asarray(df[['Followees', 'Followers', 'No of posts', 'Retweet count', 'Favorite count', 'Positive words', 'Negative words', 'No: of Words']])
+
+Y = np.asarray(df['Depressed'])
+
+tweetClassifier.fit(tweetFeature, datasetReader.Depressed)
+activityClassifier.fit(X, Y)
+
+try:
+    print("Classifiers ready!\n")
+except:
+    pass
 
 @api_view(('POST',))
 def username(request):
@@ -217,21 +237,8 @@ def countWords(tweet):
 	return(len(tweetList))
 
 def training(tweetDetails):
-    vectorizer = CountVectorizer(tokenizer=lambda doc: doc, lowercase=False)
-    tweetClassifier = MultinomialNB()
-    activityClassifier = MultinomialNB()
-
-    datasetReader = pd.read_csv(os.path.join(settings.BASE_DIR, 'cleanedDataset.csv'))
-    df = pd.DataFrame(datasetReader)
-
-    tweetFeature = vectorizer.fit_transform(datasetReader.Tweet)
+    
     testTweetFeature = vectorizer.transform(tweetDetails['Tweet'])
-
-    tweetClassifier.fit(tweetFeature, datasetReader.Depressed)
-
-    X = np.asarray(df[['Followees', 'Followers', 'No of posts', 'Retweet count', 'Favorite count', 'Positive words', 'Negative words', 'No: of Words']])
-
-    Y = np.asarray(df['Depressed'])
 
     Xt = np.asarray([tweetDetails['Followees'],tweetDetails['Followers'],tweetDetails['No of posts'],tweetDetails['Retweet count'],tweetDetails['Favorite count'],tweetDetails['Positive words'],tweetDetails['Negative words'],tweetDetails['No: of Words']])
 
@@ -239,8 +246,6 @@ def training(tweetDetails):
         Xt = Xt.reshape(1,-1)
     else:
         Xt = Xt.transpose()
-
-    activityClassifier.fit(X, Y)
 
     prediction1 = tweetClassifier.predict_proba(testTweetFeature)
     prediction2 = activityClassifier.predict_proba(Xt)
@@ -269,7 +274,10 @@ def training(tweetDetails):
             else:
                 tally.append(4)
 
-    print(tally)
+    try:
+        print(tally)
+    except:
+        pass
 
     avg = 0
 
