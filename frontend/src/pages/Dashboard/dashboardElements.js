@@ -4,8 +4,6 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: 100vh;
-
-  @media screen and (max-width: 768px) {
     flex-direction: column;
   }
 `;
@@ -19,10 +17,12 @@ export const Container = styled.div`
 
 export const TopWrapper = styled.div`
   display: flex;
+  margin: 10px 50px 0 100px;
   flex-direction: row;
   justify-content: space-between;
 
   @media screen and (max-width: 768px) {
+    margin: 80px;
     flex-direction: column;
   }
 `;
@@ -49,6 +49,7 @@ export const TwitterHandle = styled.div`
   justify-content: center;
   height: 100px;
   width: 50%;
+  white-space: nowrap;
 
   @media screen and (max-width: 768px) {
     align-items: center;
@@ -65,6 +66,7 @@ export const DateWrapper = styled.div`
   justify-content: center;
   height: 100px;
   width: 50%;
+  white-space: nowrap;
 
   @media screen and (max-width: 768px) {
     align-items: center;

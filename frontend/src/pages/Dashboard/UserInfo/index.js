@@ -2,7 +2,7 @@ import React from "react";
 
 import {
   GridContainer,
-  AccountSummary,
+  Analytics,
   P,
   RecentTweets,
   OtherData,
@@ -18,15 +18,17 @@ import * as FaIcons from "react-icons/fa";
 import * as BiIcons from "react-icons/bi";
 import { IconContext } from "react-icons/lib";
 import TweetSlider from "../RecentTweets";
+import Chart from "../Chart/index";
 
 const UserInfo = () => {
   return (
     <>
       <IconContext.Provider value={{ fill: "#fff" }}>
         <GridContainer>
-          <AccountSummary>
-            <P>Account Summary</P>
-          </AccountSummary>
+          <Analytics>
+            <P>Analytics</P>
+            <Chart />
+          </Analytics>
 
           <RecentTweets>
             <P>Recent Tweets</P>
@@ -35,7 +37,7 @@ const UserInfo = () => {
         </GridContainer>
         <OtherData>
           <OtherWrapper>
-            <P2>Analytics</P2>
+            <P2>Account Summary</P2>
             <Box>
               <BoxWrapper>
                 <div>

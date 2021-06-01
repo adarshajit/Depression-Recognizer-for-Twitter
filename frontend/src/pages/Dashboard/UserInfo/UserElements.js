@@ -2,13 +2,17 @@ import styled from "styled-components";
 
 export const GridContainer = styled.div`
   display: grid;
-  margin: 10px;
+  margin: 10px 50px 0 100px;
   grid-gap: 40px;
 
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  @media screen and (max-width: 768px) {
+    margin: 10px;
+  }
 `;
 
-export const AccountSummary = styled.div`
+export const Analytics = styled.div`
   height: 400px;
   background-color: #e1e8ed;
   border-radius: 20px;
@@ -20,9 +24,9 @@ export const AccountSummary = styled.div`
 
 export const P = styled.p`
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
   color: #000;
-  margin: 10px 0 0 10px;
+  margin: 20px 0 0 28px;
 `;
 
 // export const Data = styled.div`
@@ -82,7 +86,7 @@ export const OtherData = styled.div`
 
 export const P2 = styled.p`
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
   color: #000;
   display: flex;
   align-self: center;
@@ -100,7 +104,7 @@ export const Box = styled.div`
   border-radius: 20px;
 
   @media screen and (max-width: 768px) {
-    width: 350px;
+    width: 90%;
     height: 130px;
     margin: 40px 0 20px 0;
     align-self: center;
@@ -121,7 +125,7 @@ export const OtherWrapper = styled.div`
 export const BoxWrapper = styled.div`
   display: flex;
   width: 250px;
-  height: 100px;
+  height: 128px;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
@@ -130,6 +134,11 @@ export const BoxWrapper = styled.div`
   backdrop-filter: blur(11px);
   -webkit-backdrop-filter: blur(11px);
   border-radius: 20px;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 140px;
+  }
 `;
 
 export const Sub = styled.p`

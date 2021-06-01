@@ -6,12 +6,13 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  position: absolute;
 }
 
 @media screen and (max-width: 768px) {
   .navbar {
     height: 70px;
-    width: auto;
+    width: 100%;
     flex-direction: row;
   }
 }
@@ -33,6 +34,7 @@
   top: 0px;
   left: -100%;
   transition: 850ms;
+  z-index: 10;
 }
 
 .nav-menu.active {
