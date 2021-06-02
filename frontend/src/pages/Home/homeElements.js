@@ -6,20 +6,23 @@ import { Link } from "react-router-dom";
 
 export const HomeWrapper = styled.div`
   height: 100%;
+  /* background-image: radial-gradient(circle, #ffff, #25a1f2); */
   background-image: radial-gradient(
     circle,
-    #73b4ff,
-    #5fa3f8,
-    #4d91f0,
-    #3c80e8,
-    #2e6ede
+    #ffffff,
+    #edf0ff,
+    #d4e3ff,
+    #b1d7ff,
+    #83ceff
   );
 `;
 
 export const HomeContainer = styled.div`
   height: 100vh;
   display: flex;
+  position: relative;
   flex-direction: column;
+  overflow: hidden;
 
   @media screen and (max-width: 768px) {
     height: 800px;
@@ -29,21 +32,37 @@ export const HomeContainer = styled.div`
 export const Img1 = styled.img`
   position: absolute;
   top: 50%;
-  left: 30%;
+  left: 20%;
+  width: 130px;
   transform: translate(-50%, -50%);
 `;
 
 export const Img2 = styled.img`
   position: absolute;
   top: 80%;
-  left: 80%;
+  left: 83%;
+  width: 270px;
   transform: translate(-50%, -50%);
+
+  @media screen and (max-width: 768px) {
+    top: 90%;
+    width: 100px;
+  }
 `;
 
 export const Img3 = styled.img`
   position: absolute;
-  top: 20%;
-  left: 80%;
+  top: 15%;
+  left: 40%;
+  width: 50px;
+  transform: translate(-50%, -50%);
+`;
+
+export const Img4 = styled.img`
+  position: absolute;
+  top: 40%;
+  left: 70%;
+  width: 60px;
   transform: translate(-50%, -50%);
 `;
 export const H1 = styled.h1`
@@ -53,7 +72,7 @@ export const H1 = styled.h1`
   font-size: 50px;
   font-weight: 700;
   font-size: 72px;
-  color: #fff;
+  color: #1565c0;
   z-index: 10;
 
   @media screen and (max-width: 768px) {
@@ -74,7 +93,7 @@ export const P = styled.p`
   font-weight: 700;
   text-align: center;
   margin-bottom: 50px;
-  color: #fff;
+  color: #000;
 
   @media screen and (max-width: 768px) {
     font-size: 18px;
@@ -83,12 +102,14 @@ export const P = styled.p`
 `;
 
 export const BoxGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: row;
   grid-gap: 40px;
   align-self: center;
+  justify-content: center;
+
   @media screen and (max-width: 768px) {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 `;
 
@@ -106,7 +127,6 @@ export const Box = styled.div`
 
   &:hover {
     cursor: pointer;
-    border: 3px solid #1da1f2;
     background: rgba(255, 255, 255, 0.65);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(2.5px);
@@ -115,7 +135,12 @@ export const Box = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    width: 280px;
+    width: 350px;
+    height: 110px;
+  }
+
+  @media screen and (max-width: 376px) {
+    width: 270px;
     height: 110px;
   }
 `;
@@ -124,6 +149,7 @@ export const BoxItems = styled.div`
   display: flex;
   flex-direction: column;
   align-self: center;
+  width: 100%;
 
   @media screen and (max-width: 768px) {
     flex-direction: row;
@@ -134,7 +160,7 @@ export const UserIcon = styled(User)`
   margin: 60px 0 40px 0;
   align-self: center;
   font-size: 70px;
-  fill: #00447a;
+  fill: #25a1f2;
   @media screen and (max-width: 768px) {
     margin: 30px 10px 0 40px;
     font-size: 50px;
@@ -145,7 +171,7 @@ export const KeyIcon = styled(Keywords)`
   margin: 60px 0 40px 0;
   align-self: center;
   font-size: 70px;
-  fill: #00447a;
+  fill: #25a1f2;
 
   @media screen and (max-width: 768px) {
     margin: 30px 10px 0 40px;
@@ -157,17 +183,20 @@ export const QuillIcon = styled(Quill)`
   margin: 60px 0 40px 0;
   align-self: center;
   font-size: 70px;
-  fill: #00447a;
+  fill: #25a1f2;
   @media screen and (max-width: 768px) {
     margin: 30px 10px 0 40px;
     font-size: 50px;
   }
 `;
 export const Text = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 24px;
   font-weight: 700;
-  align-self: center;
   color: #00447a;
+  width: 100%;
   @media screen and (max-width: 768px) {
     margin: 25px 0 0 30px;
     font-size: 18px;

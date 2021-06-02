@@ -45,6 +45,7 @@ const UserInfo = () => {
                     style={{
                       fill: "#1DA1F2",
                       fontSize: "32px",
+                      marginLeft: "28px",
                     }}
                   />
                   <Sub>Followers</Sub>
@@ -58,7 +59,11 @@ const UserInfo = () => {
               <BoxWrapper>
                 <div>
                   <FaIcons.FaUserCheck
-                    style={{ fill: "#1DA1F2", fontSize: "32px" }}
+                    style={{
+                      fill: "#1DA1F2",
+                      fontSize: "32px",
+                      marginLeft: "28px",
+                    }}
                   />
                   <Sub>Following</Sub>
                 </div>
@@ -71,7 +76,11 @@ const UserInfo = () => {
               <BoxWrapper>
                 <div>
                   <BiIcons.BiMessageAltEdit
-                    style={{ fill: "#1DA1F2", fontSize: "32px" }}
+                    style={{
+                      fill: "#1DA1F2",
+                      fontSize: "32px",
+                      marginLeft: "28px",
+                    }}
                   />
                   <Sub>No of posts</Sub>
                 </div>

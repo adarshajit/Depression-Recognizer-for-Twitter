@@ -14,8 +14,9 @@ export const GridContainer = styled.div`
 
 export const Analytics = styled.div`
   height: 400px;
-  background-color: #e1e8ed;
+  /* background-color: #e1e8ed; */
   border-radius: 20px;
+  background-image: linear-gradient(to top left, #ffb003, #ffcb03);
   /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
   @media screen and (min-width: 1500px) {
     height: 650px;
@@ -58,7 +59,15 @@ export const P = styled.p`
 
 export const RecentTweets = styled.div`
   height: 400px;
-  background: rgba(74, 144, 226, 0.5);
+  /* background: rgba(74, 144, 226, 0.5); */
+  background-image: linear-gradient(
+    to left top,
+    #4692ff,
+    #3e9bff,
+    #3aa4ff,
+    #3cacff,
+    #44b4ff
+  );
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
   /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */

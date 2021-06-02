@@ -53,16 +53,16 @@
   }
 }
 
-.circular-chart.orange .circle {
-  stroke: #ff9f00;
+.circular-chart.yellow .circle {
+  stroke: rgb(255, 219, 61);
 }
 
 .circular-chart.green .circle {
   stroke: #4cc790;
 }
 
-.circular-chart.blue .circle {
-  stroke: #3c9ee5;
+.circular-chart.orange .circle {
+  stroke: darkorange;
 }
 
 .percentage {

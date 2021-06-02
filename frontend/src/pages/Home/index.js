@@ -16,6 +16,7 @@ import {
   Img1,
   Img2,
   Img3,
+  Img4,
 } from "./homeElements";
 import balls1 from "../../assets/ball1.svg";
 import balls2 from "../../assets/ball2.svg";
@@ -26,6 +27,7 @@ const Home = () => {
         <Img1 src={balls1} />
         <Img2 src={balls2} />
         <Img3 src={balls2} />
+        <Img4 src={balls2} />
         <HomeContainer>
           <H1>Depression Recogniser</H1>
           <P>Check the presence of depression among the following</P>

@@ -12,7 +12,7 @@ export const SidebarData = [
   },
   {
     title: "Twitter User",
-    path: "/user",
+    path: "/twitterHandle",
     icon: <FaIcons.FaUser />,
     cName: "nav-text",
   },
