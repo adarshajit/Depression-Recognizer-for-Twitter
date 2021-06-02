@@ -127,10 +127,13 @@ export const Box = styled.div`
 
   &:hover {
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.65);
+    /* background: rgba(255, 255, 255, 0.65);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(2.5px);
-    -webkit-backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px); */
+    background-color: #fff;
+    transition: 0.3s all ease-in-out;
+    transform: translateY(-8px);
     border-radius: 20px;
   }
 

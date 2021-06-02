@@ -1,0 +1,19 @@
+#Vector_32 {
+  animation: move 2s infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-150px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
