@@ -9,8 +9,8 @@ import {
   DateWrapper,
 } from "./dashboardElements";
 
-import Sidebar from "../../components/Sidebar";
-import UserInfo from "./UserInfo";
+import Sidebar from "../../../components/Sidebar";
+import UserInfo from "./TweetInfo";
 const Dashboard = () => {
   return (
     <>
