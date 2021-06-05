@@ -23,6 +23,8 @@ export const HomeContainer = styled.div`
   position: relative;
   flex-direction: column;
   overflow: hidden;
+  justify-content: center;
+  align-items: center;
 
   @media screen and (max-width: 768px) {
     height: 800px;
@@ -68,7 +70,6 @@ export const Img4 = styled.img`
 export const H1 = styled.h1`
   align-self: center;
   position: relative;
-  margin-top: 120px;
   font-size: 50px;
   font-weight: 700;
   font-size: 72px;
@@ -124,15 +125,12 @@ export const Box = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 20px;
   box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+  transition: 0.3s all ease-out;
 
   &:hover {
     cursor: pointer;
-    /* background: rgba(255, 255, 255, 0.65);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(2.5px);
-    -webkit-backdrop-filter: blur(2.5px); */
     background-color: #fff;
-    transition: 0.3s all ease-in-out;
+    transition: 0.3s all ease-out;
     transform: translateY(-8px);
     border-radius: 20px;
   }
