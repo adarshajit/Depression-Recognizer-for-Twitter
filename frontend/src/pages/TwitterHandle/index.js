@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   GridContainer,
   Login,
@@ -14,14 +14,27 @@ import "./animate.css";
 import { IconContext } from "react-icons/lib";
 
 const TwitterHandle = () => {
+  const [userId, setuserId] = useState("");
+
+  const handleSubmit = async (e) => {
+    alert("the form is submitted " + userId);
+    var data = new FormData();
+    data.append("username", userId);
+    fetch("https://depression-recognizer.herokuapp.com/api/username/", {
+      method: "POST",
+      body: data,
+    }).then((response) => console.log(response.json()));
+
+    e.preventDefault();
+  };
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         <GridContainer>
           <Login>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <P>Enter your Twitter Handle</P>
-              <Input />
+              <Input onChange={(e) => setuserId(e.target.value)} />
               <Button>Submit</Button>
             </Form>
           </Login>
@@ -33,7 +46,7 @@ const TwitterHandle = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g id="search 1" clip-path="url(#clip0)">
+              <g id="search 1" clipPath="url(#clip0)">
                 <g id="other">
                   <path
                     id="Vector"
