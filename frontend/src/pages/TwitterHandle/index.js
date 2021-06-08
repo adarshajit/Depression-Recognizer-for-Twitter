@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   GridContainer,
   Login,
@@ -8,20 +9,38 @@ import {
   Button,
   Display,
 } from "./HandleElements";
-
 import "./animate.css";
-
 import { IconContext } from "react-icons/lib";
 
+
 const TwitterHandle = () => {
+
+  const [handle, setHandle] = useState("")
+
+  const history = useHistory()
+
+  const handleSubmit = (event) => {
+    alert('The form submitted ' + handle)
+    var data = new FormData()
+    data.append("username", handle)
+    fetch('https://depression-recognizer.herokuapp.com/api/username/', {
+      method: "POST",
+      body: data
+    }).then(response => response.json())
+    .then(response => {
+      history.push('/userDash', {analysis: response})
+    })
+    event.preventDefault()
+  }
+
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         <GridContainer>
           <Login>
-            <Form>
+            <Form onSubmit={handleSubmit}>
               <P>Enter your Twitter Handle</P>
-              <Input />
+              <Input onChange={e => setHandle(e.target.value)}/>
               <Button>Submit</Button>
             </Form>
           </Login>
@@ -33,7 +52,7 @@ const TwitterHandle = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g id="search 1" clip-path="url(#clip0)">
+              <g id="search 1" clipPath="url(#clip0)">
                 <g id="other">
                   <path
                     id="Vector"

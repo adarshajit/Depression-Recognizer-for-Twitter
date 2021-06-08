@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   MainContainer,
   Container,
@@ -11,7 +11,12 @@ import {
 
 import Sidebar from "../../../components/Sidebar";
 import UserInfo from "./UserInfo";
-const Dashboard = () => {
+const Dashboard = (props) => {
+
+  const [analysis, setAnalysis] = useState(props.location.state.analysis)
+
+  console.log(analysis)
+
   return (
     <>
       <MainContainer>
@@ -19,8 +24,8 @@ const Dashboard = () => {
         <Container>
           <TopWrapper>
             <TwitterHandle>
-              <H1>Adarsh Ajit</H1>
-              <P1>@AdarshAjit</P1>
+              <H1>{analysis.name}</H1>
+              <P1>@{analysis.username}</P1>
             </TwitterHandle>
 
             <DateWrapper>
