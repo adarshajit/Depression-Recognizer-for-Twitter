@@ -11,7 +11,7 @@ import {
 } from "./dashboardElements";
 
 import Sidebar from "../../../components/Sidebar";
-import UserInfo from "./UserInfo";
+import KeywordInfo from "./keywordInfo";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -23,6 +23,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    console.log(this.state.analysis);
     let today = new Date();
     let month = today.getMonth();
     const Months = [
@@ -76,7 +77,7 @@ class Dashboard extends React.Component {
                 </H1>
               </DateWrapper>
             </TopWrapper>
-            <UserInfo
+            <KeywordInfo
               stats={this.state.analysis}
               tweets={this.state.analysis.tweets}
             />

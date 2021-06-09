@@ -14,7 +14,7 @@ import {
   OtherWrapper,
   BoxWrapper,
   Sub,
-} from "./UserElements";
+} from "./keywordElements";
 
 import * as HiIcons from "react-icons/hi";
 import * as FaIcons from "react-icons/fa";
@@ -22,7 +22,7 @@ import * as BiIcons from "react-icons/bi";
 import { IconContext } from "react-icons/lib";
 import TweetSlider from "../RecentTweets";
 
-const UserInfo = ({ stats, tweets }) => {
+const KeywordInfo = ({ stats, tweets }) => {
   const depLevel = stats.depLevel;
   var message = "";
   if (depLevel <= 2) {
@@ -111,4 +111,4 @@ const UserInfo = ({ stats, tweets }) => {
   );
 };
 
-export default UserInfo;
+export default KeywordInfo;
