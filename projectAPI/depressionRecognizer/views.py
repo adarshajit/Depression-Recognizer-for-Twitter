@@ -136,9 +136,12 @@ def tweet(request):
 @api_view(('POST',))
 def keywords(request):
     keywords = request.POST.get('keywords')
-    # noOfTweets = int(request.POST.get('noOfTweets'))
-    noOfTweets = 5
+    noOfTweets = int(request.POST.get('noOfTweets'))
+    # noOfTweets = 5
     tweetList = []
+    userList = []
+    usernameList = []
+    profileList = []
     tweetDetails = {'Tweet':{}, "Followees": {}, "Followers": {}, "No of posts": {}, "Retweet count": {}, "Favorite count": {}, "Positive words": {}, "Negative words": {}, "No: of Words": {}}
     dataLists = [[] for i in range(9)]
 
@@ -152,7 +155,12 @@ def keywords(request):
         cleanedTweet = stop_words(cleanedTweet)
         cleanedTweet = stemmingLines(cleanedTweet)
 
+        # print(tweet)
+
         tweetList.append(tweet.text)
+        userList.append(tweet.user.name)
+        usernameList.append(tweet.user.screen_name)
+        profileList.append(tweet.user.profile_image_url)
 
         dataLists[1].append(api.get_user(tweet.user.screen_name).friends_count)
         dataLists[2].append(api.get_user(tweet.user.screen_name).followers_count)
@@ -176,7 +184,7 @@ def keywords(request):
 
     avg, tally = training(tweetDetails)
 
-    res = {"keywords":keywords, "noOfTweets":noOfTweets, "Tweets":tweetList , "depTally": tally}
+    res = {"keywords":keywords, "noOfTweets":noOfTweets, "Tweets":tweetList , "depTally": tally, "users": userList, "usernames": usernameList, "profilePictures": profileList}
     return Response(res)
 
 
