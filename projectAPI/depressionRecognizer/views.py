@@ -90,7 +90,7 @@ def username(request):
     tweetDetails['Negative words'] = dataLists[7]
     tweetDetails['No: of Words'] = dataLists[8]
 
-    avg = training(tweetDetails)
+    avg, tally = training(tweetDetails)
 
     res = {"name": name, "username":username, "profileImage": profileImageURL, "followees":tweetDetails['Followees'][0], "followers":tweetDetails['Followers'][0], "postCount":tweetDetails['No of posts'][0], "depLevel": avg, "tweets":tweetList}
 
@@ -128,7 +128,7 @@ def tweet(request):
         tweetDetails['Negative words'] = neg
         tweetDetails['No: of Words'] = countOfWords
 
-    avg = training(tweetDetails)
+    avg, tally = training(tweetDetails)
 
     res = {"name": name, "username":username, "profileImage": profileImageURL, "followees":tweetDetails['Followees'], "followers":tweetDetails['Followers'], "postCount":tweetDetails['No of posts'], "tweet":tweet, "depLevel": avg}
     return Response(res)
@@ -174,9 +174,9 @@ def keywords(request):
     tweetDetails['Negative words'] = dataLists[7]
     tweetDetails['No: of Words'] = dataLists[8]
 
-    avg = training(tweetDetails)
+    avg, tally = training(tweetDetails)
 
-    res = {"keywords":keywords, "noOfTweets":noOfTweets, "Tweets":tweetList , "depLevel": avg}
+    res = {"keywords":keywords, "noOfTweets":noOfTweets, "Tweets":tweetList , "depTally": tally}
     return Response(res)
 
 
@@ -286,4 +286,4 @@ def training(tweetDetails):
 
     avg = avg/len(tally)
 
-    return avg
+    return avg, tally
