@@ -10,12 +10,11 @@ import {
 } from "./dashboardElements";
 
 import Sidebar from "../../../components/Sidebar";
-import UserInfo from "./TweetInfo";
+import TweetInfo from "./TweetInfo";
 const Dashboard = (props) => {
+  const [analysis, setAnalysis] = useState(props.location.state.analysis);
 
-  const [analysis, setAnalysis] = useState(props.location.state.analysis)
-
-  console.log(analysis)
+  console.log(analysis);
 
   return (
     <>
@@ -24,8 +23,8 @@ const Dashboard = (props) => {
         <Container>
           <TopWrapper>
             <TwitterHandle>
-              <H1>Adarsh Ajit</H1>
-              <P1>@AdarshAjit</P1>
+              <H1>{analysis.name}</H1>
+              <P1>{`@${analysis.username}`}</P1>
             </TwitterHandle>
 
             <DateWrapper>
@@ -33,7 +32,7 @@ const Dashboard = (props) => {
               <H1>28 May 2021</H1>
             </DateWrapper>
           </TopWrapper>
-          <UserInfo />
+          <TweetInfo stats={analysis} />
         </Container>
       </MainContainer>
     </>

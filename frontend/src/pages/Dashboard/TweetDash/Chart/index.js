@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-const Chart = () => {
+const Chart = ({ value }) => {
   return (
     <>
       <div class="flex-wrapper">
@@ -20,7 +20,7 @@ const Chart = () => {
           a 15.9155 15.9155 0 0 1 0 -31.831"
             />
             <text x="18" y="20.35" class="percentage">
-              85%
+              {`${(value / 4) * 100}%`}
             </text>
           </svg>
         </div>
