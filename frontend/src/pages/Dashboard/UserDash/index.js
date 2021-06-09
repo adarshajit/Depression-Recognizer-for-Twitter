@@ -12,68 +12,77 @@ import {
 
 import Sidebar from "../../../components/Sidebar";
 import UserInfo from "./UserInfo";
-const Dashboard = (props) => {
-  const analysis = props.location.state.analysis;
 
-  console.log(analysis);
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
 
-  let today = new Date();
-  let month = today.getMonth();
-  const Months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+    this.state = {
+      analysis: props.location.state.analysis,
+    };
+  }
 
-  let day = today.getDay();
+  render() {
+    let today = new Date();
+    let month = today.getMonth();
+    const Months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
 
-  const Days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+    let day = today.getDay();
 
-  let year = today.getFullYear();
+    const Days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
 
-  let date = today.getDate();
+    let year = today.getFullYear();
 
-  return (
-    <>
-      <MainContainer>
-        <Sidebar />
-        <Container>
-          <TopWrapper>
-            <Img src={analysis.profileImage} />
-            <TwitterHandle>
-              <H1>{analysis.name}</H1>
-              <P1>@{analysis.username}</P1>
-            </TwitterHandle>
+    let date = today.getDate();
+    return (
+      <>
+        <MainContainer>
+          <Sidebar />
+          <Container>
+            <TopWrapper>
+              <Img src={this.state.analysis.profileImage} />
+              <TwitterHandle>
+                <H1>{this.state.analysis.name}</H1>
+                <P1>@{this.state.analysis.username}</P1>
+              </TwitterHandle>
 
-            <DateWrapper>
-              <P1>{Days[day]}</P1>
-              <H1>
-                {date} {Months[month]} {year}
-              </H1>
-            </DateWrapper>
-          </TopWrapper>
-          <UserInfo stats={analysis} tweets={analysis.tweets} />
-        </Container>
-      </MainContainer>
-    </>
-  );
-};
+              <DateWrapper>
+                <P1>{Days[day]}</P1>
+                <H1>
+                  {date} {Months[month]} {year}
+                </H1>
+              </DateWrapper>
+            </TopWrapper>
+            <UserInfo
+              stats={this.state.analysis}
+              tweets={this.state.analysis.tweets}
+            />
+          </Container>
+        </MainContainer>
+      </>
+    );
+  }
+}
 
 export default Dashboard;
