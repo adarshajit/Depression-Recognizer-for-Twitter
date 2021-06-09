@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MainContainer,
   Container,
@@ -11,7 +11,12 @@ import {
 
 import Sidebar from "../../../components/Sidebar";
 import UserInfo from "./TweetInfo";
-const Dashboard = () => {
+const Dashboard = (props) => {
+
+  const [analysis, setAnalysis] = useState(props.location.state.analysis)
+
+  console.log(analysis)
+
   return (
     <>
       <MainContainer>

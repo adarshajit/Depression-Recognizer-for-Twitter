@@ -20,7 +20,6 @@ const TwitterHandle = () => {
   const history = useHistory()
 
   const handleSubmit = (event) => {
-    alert('The form submitted ' + handle)
     var data = new FormData()
     data.append("username", handle)
     fetch('https://depression-recognizer.herokuapp.com/api/username/', {
