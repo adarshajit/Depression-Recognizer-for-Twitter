@@ -7,7 +7,6 @@ import {
   P1,
   TwitterHandle,
   DateWrapper,
-  Img,
 } from "./dashboardElements";
 
 import Sidebar from "../../../components/Sidebar";
@@ -64,10 +63,9 @@ class Dashboard extends React.Component {
           <Sidebar />
           <Container>
             <TopWrapper>
-              <Img src={this.state.analysis.profileImage} />
               <TwitterHandle>
-                <H1>{this.state.analysis.name}</H1>
-                <P1>@{this.state.analysis.username}</P1>
+                <P1>Searched keyword:</P1>
+                <H1>{this.state.analysis.keywords}</H1>
               </TwitterHandle>
 
               <DateWrapper>
@@ -77,10 +75,7 @@ class Dashboard extends React.Component {
                 </H1>
               </DateWrapper>
             </TopWrapper>
-            <KeywordInfo
-              stats={this.state.analysis}
-              tweets={this.state.analysis.tweets}
-            />
+            <KeywordInfo stats={this.state.analysis} />
           </Container>
         </MainContainer>
       </>

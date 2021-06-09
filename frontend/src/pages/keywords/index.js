@@ -16,13 +16,13 @@ import { IconContext } from "react-icons/lib";
 import { useHistory } from "react-router-dom";
 
 const Keyword = () => {
-  const [keyword, setkeyword] = useState("");
+  const [keywords, setkeyword] = useState("");
 
   const history = useHistory();
 
   const handleSubmit = (event) => {
     var data = new FormData();
-    data.append("keyword", keyword);
+    data.append("keywords", keywords);
     fetch("https://depression-recognizer.herokuapp.com/api/keywords/", {
       method: "POST",
       body: data,
