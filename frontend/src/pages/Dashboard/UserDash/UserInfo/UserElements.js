@@ -14,6 +14,7 @@ export const GridContainer = styled.div`
 
 export const Analytics = styled.div`
   height: 400px;
+
   /* background-color: #e1e8ed; */
   border-radius: 20px;
   background-image: linear-gradient(to top left, #ffb003, #ffcb03);
@@ -23,39 +24,37 @@ export const Analytics = styled.div`
   }
 `;
 
+export const StatsWrapper = styled.div`
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 85px;
+`;
+
+export const H1 = styled.h1`
+  display: flex;
+  font-size: 36px;
+  font-weight: 700;
+  color: #000;
+  justify-content: center;
+`;
+
+export const H3 = styled.h3`
+  font-size: 24px;
+  display: flex;
+  font-weight: 600;
+  color: #000;
+  justify-content: center;
+`;
+
 export const P = styled.p`
   font-size: 24px;
   font-weight: 700;
   color: #000;
   margin: 20px 0 0 28px;
 `;
-
-// export const Data = styled.div`
-//   border-radius: 10px;
-//   display: grid;
-//   grid-template-rows: 1fr 1fr;
-//   @media screen and (min-width: 1500px) {
-//     height: 650px;
-//   }
-// `;
-
-// export const Number = styled.div`
-//   background: #e6f4ff;
-//   backdrop-filter: blur(4px);
-//   -webkit-backdrop-filter: blur(4px);
-//   border-radius: 20px;
-
-//   margin-bottom: 10px;
-//   height: 195px;
-
-//   @media screen and (max-width: 768px) {
-//     height: 140px;
-//   }
-
-//   @media screen and (min-width: 1500px) {
-//     height: 320px;
-//   }
-// `;
 
 export const RecentTweets = styled.div`
   height: 400px;

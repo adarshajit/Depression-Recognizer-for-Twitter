@@ -27,6 +27,12 @@ export const TopWrapper = styled.div`
   }
 `;
 
+export const Img = styled.img`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+`;
+
 export const H1 = styled.h1`
   font-size: 24px;
   font-weight: 700;

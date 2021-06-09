@@ -4,6 +4,9 @@ import {
   GridContainer,
   Analytics,
   P,
+  StatsWrapper,
+  H1,
+  H3,
   RecentTweets,
   OtherData,
   Box,
@@ -18,21 +21,33 @@ import * as FaIcons from "react-icons/fa";
 import * as BiIcons from "react-icons/bi";
 import { IconContext } from "react-icons/lib";
 import TweetSlider from "../RecentTweets";
-import Chart from "../Chart/index";
 
-const UserInfo = () => {
+const UserInfo = ({ stats, tweets }) => {
+  const depLevel = stats.depLevel;
+  var message = "";
+  if (depLevel < 2) {
+    message = "Not";
+  } else if (depLevel >= 2 && depLevel <= 3.4) {
+    message = "Mildly";
+  } else {
+    message = "Highly";
+  }
   return (
     <>
       <IconContext.Provider value={{ fill: "#fff" }}>
         <GridContainer>
           <Analytics>
             <P>Analytics</P>
-            <Chart />
+            <StatsWrapper>
+              <H1>{`${(depLevel / 4) * 100}%`}</H1>
+
+              <H3>{`The user is ${message} Depressed`}</H3>
+            </StatsWrapper>
           </Analytics>
 
           <RecentTweets>
             <P>Recent Tweets</P>
-            <TweetSlider />
+            <TweetSlider tweets={tweets} />
           </RecentTweets>
         </GridContainer>
         <OtherData>
@@ -51,7 +66,7 @@ const UserInfo = () => {
                   <Sub>Followers</Sub>
                 </div>
                 <div>
-                  <h1>23</h1>
+                  <h1>{stats.followers}</h1>
                 </div>
               </BoxWrapper>
             </Box>
@@ -68,7 +83,7 @@ const UserInfo = () => {
                   <Sub>Following</Sub>
                 </div>
                 <div>
-                  <h1>46</h1>
+                  <h1>{stats.followees}</h1>
                 </div>
               </BoxWrapper>
             </Box>
@@ -85,7 +100,7 @@ const UserInfo = () => {
                   <Sub>No of posts</Sub>
                 </div>
                 <div>
-                  <h1>45</h1>
+                  <h1>{stats.postCount}</h1>
                 </div>
               </BoxWrapper>
             </Box>

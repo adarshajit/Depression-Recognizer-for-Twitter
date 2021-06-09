@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./style.css";
 
-const TweetSlider = () => {
+const TweetSlider = ({ tweets }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -14,27 +14,17 @@ const TweetSlider = () => {
     arrows: true,
     className: "slides",
   };
+
   return (
     <>
       <Slider {...settings}>
-        <div className="tweet">
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
+        {tweets.map((tweet, id) => {
+          return (
+            <div className="wrapper" key={id}>
+              <p className="tweet">{tweet}</p>
+            </div>
+          );
+        })}
       </Slider>
     </>
   );
