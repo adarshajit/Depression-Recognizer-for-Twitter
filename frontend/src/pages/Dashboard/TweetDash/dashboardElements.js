@@ -17,7 +17,7 @@ export const Container = styled.div`
 
 export const TopWrapper = styled.div`
   display: flex;
-  margin: 10px 50px 0 100px;
+  margin: 100px 50px 30px 100px;
   flex-direction: row;
   justify-content: space-between;
 

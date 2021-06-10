@@ -96,7 +96,7 @@ export const P3 = styled.p`
 `;
 
 export const OtherData = styled.div`
-  margin: 10px;
+  margin: 60px 10px 40px 10px;
 
   grid-column: 1/4;
   border-radius: 10px;

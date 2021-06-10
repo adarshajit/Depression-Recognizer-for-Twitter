@@ -4,8 +4,7 @@ export const MainContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: 100vh;
-    flex-direction: column;
-  }
+  flex-direction: column;
 `;
 
 export const Container = styled.div`
@@ -17,7 +16,7 @@ export const Container = styled.div`
 
 export const TopWrapper = styled.div`
   display: flex;
-  margin: 10px 50px 0 100px;
+  margin: 100px 50px 0 100px;
   flex-direction: row;
   justify-content: space-between;
 

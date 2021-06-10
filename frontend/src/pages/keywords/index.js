@@ -17,12 +17,14 @@ import { useHistory } from "react-router-dom";
 
 const Keyword = () => {
   const [keywords, setkeyword] = useState("");
+  const [noOfTweets, setnoOfTweets] = useState("");
 
   const history = useHistory();
 
   const handleSubmit = (event) => {
     var data = new FormData();
     data.append("keywords", keywords);
+    data.append("noOfTweets", noOfTweets);
     fetch("https://depression-recognizer.herokuapp.com/api/keywords/", {
       method: "POST",
       body: data,
@@ -42,6 +44,8 @@ const Keyword = () => {
             <Form onSubmit={handleSubmit}>
               <P>Enter your Keyword</P>
               <Input onChange={(e) => setkeyword(e.target.value)} />
+              <P>Enter number of tweets</P>
+              <Input onChange={(e) => setnoOfTweets(e.target.value)} />
               <Button>Submit</Button>
             </Form>
           </Login>

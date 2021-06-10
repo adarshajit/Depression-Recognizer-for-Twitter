@@ -75,7 +75,11 @@ class Dashboard extends React.Component {
                 </H1>
               </DateWrapper>
             </TopWrapper>
-            <KeywordInfo stats={this.state.analysis} />
+            <KeywordInfo
+              stats={this.state.analysis}
+              tweets={this.state.analysis.Tweets}
+              depLevels={this.state.analysis.depTally}
+            />
           </Container>
         </MainContainer>
       </>
