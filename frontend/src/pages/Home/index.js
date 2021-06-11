@@ -11,7 +11,6 @@ import {
   Text,
   UserIcon,
   LinkB,
-  KeyIcon,
   QuillIcon,
   Img1,
   Img2,
@@ -45,14 +44,6 @@ const Home = () => {
                 <BoxItems>
                   <QuillIcon />
                   <Text>Tweet</Text>
-                </BoxItems>
-              </Box>
-            </LinkB>
-            <LinkB to="/keywords">
-              <Box>
-                <BoxItems>
-                  <KeyIcon />
-                  <Text>Keywords</Text>
                 </BoxItems>
               </Box>
             </LinkB>
