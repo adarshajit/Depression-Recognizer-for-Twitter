@@ -1,16 +1,16 @@
-#at {
-  animation: move 2s infinite;
+#Vector_32 {
+  animation: jump 2s infinite;
   transform-origin: center;
   transform-box: fill-box;
 }
 
-@keyframes move {
+@keyframes jump {
   0% {
     transform: translateY(0px);
   }
 
   50% {
-    transform: translateY(40px);
+    transform: translateY(-150px);
   }
 
   100% {

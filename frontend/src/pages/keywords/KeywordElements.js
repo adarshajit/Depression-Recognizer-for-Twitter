@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { SiTwitter } from "react-icons/si";
 
 export const GridContainer = styled.div`
   display: grid;
@@ -59,12 +58,12 @@ export const Display = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 export const Img = styled.img`
   width: 100%;
   height: 100%;
-`;
-export const Logo = styled(SiTwitter)`
-  font-size: 18rem;
-  position: absolute;
 `;

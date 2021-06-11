@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { SiTwitter } from "react-icons/si";
 
 export const GridContainer = styled.div`
   display: grid;
@@ -16,7 +15,7 @@ export const Login = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  background-color: #002a4a;
   width: 100%;
   height: 100%;
 `;
@@ -37,11 +36,17 @@ export const P = styled.p`
   margin-bottom: 10px;
 `;
 
-export const Input = styled.input`
+export const Textarea = styled.textarea`
   width: 350px;
-  height: 46px;
+  height: 260px;
   border-radius: 5px;
   margin-bottom: 20px;
+  padding-left: 10px;
+  padding-top: 10px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const Button = styled.button`
@@ -59,12 +64,12 @@ export const Display = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 export const Img = styled.img`
   width: 100%;
   height: 100%;
-`;
-export const Logo = styled(SiTwitter)`
-  font-size: 18rem;
-  position: absolute;
 `;

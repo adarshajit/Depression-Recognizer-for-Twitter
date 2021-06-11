@@ -24,7 +24,7 @@ export const SidebarData = [
   },
   {
     title: "Keyword",
-    path: "/keyword",
+    path: "/keywords",
     icon: <FaIcons.FaSortAlphaDown />,
     cName: "nav-text",
   },

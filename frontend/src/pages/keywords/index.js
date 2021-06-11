@@ -8,7 +8,6 @@ import {
   Input,
   Button,
   Display,
-  Logo,
 } from "./KeywordElements";
 import Banner from "../../assets/wallpaper.png";
 import { IconContext } from "react-icons/lib";
@@ -33,6 +32,7 @@ const Keyword = () => {
       .then((response) => {
         history.push("/keywordDash", { analysis: response });
       });
+
     event.preventDefault();
   };
 
@@ -51,7 +51,6 @@ const Keyword = () => {
           </Login>
           <Display>
             <Img src={Banner} alt="twitter banner" />
-            <Logo />
           </Display>
         </GridContainer>
       </IconContext.Provider>
