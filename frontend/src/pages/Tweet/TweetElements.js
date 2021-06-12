@@ -30,10 +30,10 @@ export const Form = styled.form`
 `;
 
 export const P = styled.p`
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 700;
   color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 export const Textarea = styled.textarea`

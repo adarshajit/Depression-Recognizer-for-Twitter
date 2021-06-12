@@ -30,6 +30,10 @@ export const Img = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  @media screen and (max-width: 768px) {
+    align-self: center;
+    margin: 20px;
+  }
 `;
 
 export const H1 = styled.h1`

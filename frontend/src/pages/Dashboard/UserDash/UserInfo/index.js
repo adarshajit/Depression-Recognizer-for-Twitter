@@ -26,13 +26,14 @@ import TweetSlider from "../RecentTweets";
 const UserInfo = ({ stats, tweets }) => {
   const depLevel = stats.depLevel;
   var message = "";
-  if (depLevel <= 2) {
+  if (depLevel < 2) {
     message = "Not";
-  } else if (depLevel > 2 && depLevel <= 3.4) {
+  } else if (depLevel >= 2 && depLevel <= 3.4) {
     message = "Mildly";
   } else {
     message = "Highly";
   }
+
   return (
     <>
       <IconContext.Provider value={{ fill: "#fff" }}>
@@ -48,6 +49,7 @@ const UserInfo = ({ stats, tweets }) => {
 
           <RecentTweets>
             <P3>Recent Tweets</P3>
+
             <TweetSlider tweets={tweets} />
           </RecentTweets>
         </GridContainer>

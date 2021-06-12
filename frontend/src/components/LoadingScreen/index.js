@@ -20,7 +20,7 @@ const Loading = () => {
         />
       </svg>
 
-      <h1 className="searching">Searching...</h1>
+      <h1 className="searching">Analyzing...</h1>
     </>
   );
 };

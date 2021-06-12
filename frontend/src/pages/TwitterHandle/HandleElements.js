@@ -21,8 +21,10 @@ export const Login = styled.div`
 `;
 
 export const Form = styled.form`
-  max-width: 350px;
-  max-height: 500px;
+  max-width: 550px;
+  max-height: 550px;
+  display: flex;
+  flex-direction: column;
 
   @media screen and (max-width: 1024px) {
     margin: 40px 0 40px 0;
@@ -30,10 +32,10 @@ export const Form = styled.form`
 `;
 
 export const P = styled.p`
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 export const Input = styled.input`

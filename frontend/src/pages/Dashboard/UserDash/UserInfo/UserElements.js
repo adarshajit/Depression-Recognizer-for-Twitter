@@ -99,6 +99,7 @@ export const P3 = styled.p`
   color: #fff;
   margin: 20px 0 0 28px; ;
 `;
+
 export const Box = styled.div`
   width: 250px;
   height: 100px;
