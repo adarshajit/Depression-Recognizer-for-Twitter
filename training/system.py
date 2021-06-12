@@ -18,8 +18,8 @@ from sklearn import metrics
 
 def username():
     username = "AlanLoovees"
-    tweetList = []
-    name = ''
+    tweetsList = []
+    displayName = ''
     profileImageURL = ''
     tweetDetails = {'Tweet':{}, "Followees": {}, "Followers": {}, "No of posts": {}, "Retweet count": {}, "Favorite count": {}, "Positive words": {}, "Negative words": {}, "No: of Words": {}}
     dataLists = [[] for i in range(9)]
@@ -31,8 +31,8 @@ def username():
         cleanedTweet = toLowerCase(cleanedTweet)
         cleanedTweet = stop_words(cleanedTweet)
         cleanedTweet = stemmingLines(cleanedTweet)
-        tweetList.append(tweet.full_text)
-        name = tweet.user.name
+        tweetsList.append(tweet.full_text)
+        displayName = tweet.user.name
         profileImageURL = tweet.user.profile_image_url_https
 
         dataLists[0].append(cleanedTweet)
@@ -55,16 +55,16 @@ def username():
     tweetDetails['Negative words'] = dataLists[7]
     tweetDetails['No: of Words'] = dataLists[8]
 
-    avg = training(tweetDetails)
+    avgDepLevel = training(tweetDetails)
 
-    res = {"name": name, "username":username, "profileImage": profileImageURL, "followees":tweetDetails['Followees'][0], "followers":tweetDetails['Followers'][0], "postCount":tweetDetails['No of posts'][0], "depLevel": avg, "tweets":tweetList}
+    response = {"displayName": displayName, "username":username, "profileImage": profileImageURL, "followees":tweetDetails['Followees'][0], "followers":tweetDetails['Followers'][0], "postCount":tweetDetails['No of posts'][0], "depLevel": avgDepLevel, "tweets":tweetsList}
 
-    print(res)
+    print(response)
 
 def tweet():
-    tweet = "u all know how depressed i am in the past few months"
+    tweet = "depression is killing me"
     username = ''
-    name = ''
+    displayName = ''
     profileImageURL = ''
     tweetData = tw.Cursor(api.search, q = tweet, lang ='en', exclude='retweets').items(1)
     tweetDetails = {'Tweet':{}, "Followees": {}, "Followers": {}, "No of posts": {}, "Retweet count": {}, "Favorite count": {}, "Positive words": {}, "Negative words": {}, "No: of Words": {}}
@@ -72,7 +72,7 @@ def tweet():
     for i in tweetData:
         username = i.user.screen_name
         tweet = i.text
-        name = i.user.name
+        displayName = i.user.name
         profileImageURL = i.user.profile_image_url_https
 
         pos, neg = posNeg(tweet)
@@ -92,16 +92,16 @@ def tweet():
         tweetDetails['Negative words'] = neg
         tweetDetails['No: of Words'] = countOfWords
 
-    avg = training(tweetDetails)
+    avgDepLevel = training(tweetDetails)
 
-    res = {"name": name, "username":username, "profileImage": profileImageURL, "followees":tweetDetails['Followees'], "followers":tweetDetails['Followers'], "postCount":tweetDetails['No of posts'], "tweet":tweet, "depLevel": avg}
+    response = {"displayName": displayName, "username":username, "profileImage": profileImageURL, "followees":tweetDetails['Followees'], "followers":tweetDetails['Followers'], "postCount":tweetDetails['No of posts'], "tweet":tweet, "depLevel": avgDepLevel}
     
-    print(res)
+    print(response)
 
 def keywords():
-    keywords = "some OR keywords"
+    keywords = "happy OR amazing"
     noOfTweets = 5
-    tweetList = []
+    tweetsList = []
     tweetDetails = {'Tweet':{}, "Followees": {}, "Followers": {}, "No of posts": {}, "Retweet count": {}, "Favorite count": {}, "Positive words": {}, "Negative words": {}, "No: of Words": {}}
     dataLists = [[] for i in range(9)]
 
@@ -115,7 +115,7 @@ def keywords():
         cleanedTweet = stop_words(cleanedTweet)
         cleanedTweet = stemmingLines(cleanedTweet)
 
-        tweetList.append(tweet.text)
+        tweetsList.append(tweet.text)
 
         dataLists[1].append(api.get_user(tweet.user.screen_name).friends_count)
         dataLists[2].append(api.get_user(tweet.user.screen_name).followers_count)
@@ -137,11 +137,11 @@ def keywords():
     tweetDetails['Negative words'] = dataLists[7]
     tweetDetails['No: of Words'] = dataLists[8]
 
-    avg = training(tweetDetails)
+    avgDepLevel = training(tweetDetails)
 
-    res = {"keywords":keywords, "noOfTweets":noOfTweets, "Tweets":tweetList , "depLevel": avg}
+    response = {"keywords":keywords, "noOfTweets":noOfTweets, "Tweets":tweetsList , "depLevel": avgDepLevel}
     
-    print(res)
+    print(response)
 
 
 def cleaning(tweet):
@@ -197,36 +197,36 @@ def posNeg(paragraph):
 	return pos,neg
 
 def countWords(tweet):
-	tweetList = tweet.split(" ")
-	return(len(tweetList))
+	tweetsList = tweet.split(" ")
+	return(len(tweetsList))
 
 def training(tweetDetails):
     
     testTweetFeature = vectorizer.transform(tweetDetails['Tweet'])
 
-    Xt = np.asarray([tweetDetails['Followees'],tweetDetails['Followers'],tweetDetails['No of posts'],tweetDetails['Retweet count'],tweetDetails['Favorite count'],tweetDetails['Positive words'],tweetDetails['Negative words'],tweetDetails['No: of Words']])
+    testX = np.asarray([tweetDetails['Followees'],tweetDetails['Followers'],tweetDetails['No of posts'],tweetDetails['Retweet count'],tweetDetails['Favorite count'],tweetDetails['Positive words'],tweetDetails['Negative words'],tweetDetails['No: of Words']])
 
-    if(Xt.ndim == 1):
-        Xt = Xt.reshape(1,-1)
+    if(testX.ndim == 1):
+        testX = testX.reshape(1,-1)
     else:
-        Xt = Xt.transpose()
+        testX = testX.transpose()
 
     prediction1 = tweetClassifier.predict_proba(testTweetFeature)
-    prediction2 = activityClassifier.predict_proba(Xt)
+    prediction2 = activityClassifier.predict_proba(testX)
 
-    pos = []
+    probabilityMatrix = []
     weight = 0.1
 
     # Logarithmic addition for combining probabilities
     for i in range(len(prediction2)):
-        res = [np.exp(np.log(prediction1[i][0]) + np.log(prediction2[i][0]+weight)),np.exp(np.log(prediction1[i][1]) + np.log(prediction2[i][1]+weight)),np.exp(np.log(prediction1[i][2]) + np.log(prediction2[i][2]+weight))]
-        pos.append(res)
+        response = [np.exp(np.log(prediction1[i][0]) + np.log(prediction2[i][0]+weight)),np.exp(np.log(prediction1[i][1]) + np.log(prediction2[i][1]+weight)),np.exp(np.log(prediction1[i][2]) + np.log(prediction2[i][2]+weight))]
+        probabilityMatrix.append(response)
 
     tally = []
 
     # Adding the tally of resutls to a tally list
 
-    for i in pos:
+    for i in probabilityMatrix:
         if i[0] > i[1]:
             if i[0] > i[2]:
                 tally.append(0)
@@ -238,22 +238,20 @@ def training(tweetDetails):
             else:
                 tally.append(4)
 
-    try:
-        print(tally)
-    except:
-        pass
+    
+    print(tally)
 
-    avg = 0
+    avgDepLevel = 0
 
     for i in tally:
-        avg += i
+        avgDepLevel += i
 
-    avg = avg/len(tally)
+    avgDepLevel = avgDepLevel/len(tally)
 
-    return avg
+    return avgDepLevel
 
 
-print("Preparing classifier....\n\n")
+print("\nPreparing the classifiers....\n\n")
 
 accessToken = '2210845584-ChruE1rERcvIRGmVTqn3UDvLrW3h9hXtOodu9Ec'
 accessTokenSecret = '3WhULUNaC3Bw98t0osC0iVtYS99fI6Ktd0OozOevVnYD3'
@@ -269,21 +267,18 @@ tweetClassifier = MultinomialNB()
 activityClassifier = MultinomialNB()
 
 datasetReader = pd.read_csv('./cleanedDataset.csv')
-df = pd.DataFrame(datasetReader)
+dataFrame = pd.DataFrame(datasetReader)
 
 tweetFeature = vectorizer.fit_transform(datasetReader.Tweet)
 
-X = np.asarray(df[['Followees', 'Followers', 'No of posts', 'Retweet count', 'Favorite count', 'Positive words', 'Negative words', 'No: of Words']])
+X = np.asarray(dataFrame[['Followees', 'Followers', 'No of posts', 'Retweet count', 'Favorite count', 'Positive words', 'Negative words', 'No: of Words']])
 
-Y = np.asarray(df['Depressed'])
+Y = np.asarray(dataFrame['Depressed'])
 
 tweetClassifier.fit(tweetFeature, datasetReader.Depressed)
 activityClassifier.fit(X, Y)
 
-try:
-    print("Classifiers ready!\n")
-except:
-    pass
+print("Classifiers ready!\n")
 
 
 print("Select an option\n\n1) User Analysis\n2) Tweet Analysis\n3) Keywords Analysis\n\n")
