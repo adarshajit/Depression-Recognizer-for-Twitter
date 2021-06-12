@@ -14,6 +14,7 @@ import {
   OtherWrapper,
   BoxWrapper,
   Sub,
+  P3,
 } from "./UserElements";
 
 import * as HiIcons from "react-icons/hi";
@@ -46,7 +47,7 @@ const UserInfo = ({ stats, tweets }) => {
           </Analytics>
 
           <RecentTweets>
-            <P>Recent Tweets</P>
+            <P3>Recent Tweets</P3>
             <TweetSlider tweets={tweets} />
           </RecentTweets>
         </GridContainer>

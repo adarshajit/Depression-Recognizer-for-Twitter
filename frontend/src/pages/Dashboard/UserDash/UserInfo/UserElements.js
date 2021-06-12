@@ -58,15 +58,8 @@ export const P = styled.p`
 
 export const RecentTweets = styled.div`
   height: 400px;
-  /* background: rgba(74, 144, 226, 0.5); */
-  background-image: linear-gradient(
-    to left top,
-    #4692ff,
-    #3e9bff,
-    #3aa4ff,
-    #3cacff,
-    #44b4ff
-  );
+  background: #24a0f2;
+  /* border: 5px solid #4692ff; */
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
   /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
@@ -100,6 +93,12 @@ export const P2 = styled.p`
   align-self: center;
 `;
 
+export const P3 = styled.p`
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  margin: 20px 0 0 28px; ;
+`;
 export const Box = styled.div`
   width: 250px;
   height: 100px;
