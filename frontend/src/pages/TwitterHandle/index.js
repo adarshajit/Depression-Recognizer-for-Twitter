@@ -12,6 +12,7 @@ import {
 
 import { IconContext } from "react-icons/lib";
 import "./animate.css";
+import Loading from "../../components/LoadingScreen";
 const TwitterHandle = () => {
   const [handle, setHandle] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -28,26 +29,16 @@ const TwitterHandle = () => {
       .then((response) => response.json())
       .then((response) => {
         history.push("/userDash", { analysis: response });
-        setLoading(false)
+        setLoading(false);
       });
     event.preventDefault();
   };
 
-  const Loading = () => {
-    return (
-      
-      <>
-        <h1>Loading</h1>
-      </>
-
-      )
-  }
-
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
-        {isLoading && <Loading/>}
-        <GridContainer style={{display: isLoading? "none": "grid"}}>
+        {isLoading && <Loading />}
+        <GridContainer style={{ display: isLoading ? "none" : "grid" }}>
           <Login>
             <Form onSubmit={handleSubmit}>
               <P>Enter your Twitter Handle</P>
