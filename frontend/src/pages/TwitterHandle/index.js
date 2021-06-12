@@ -14,6 +14,7 @@ import { IconContext } from "react-icons/lib";
 import "./animate.css";
 const TwitterHandle = () => {
   const [handle, setHandle] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   const history = useHistory();
 
@@ -27,19 +28,31 @@ const TwitterHandle = () => {
       .then((response) => response.json())
       .then((response) => {
         history.push("/userDash", { analysis: response });
+        setLoading(false)
       });
     event.preventDefault();
   };
 
+  const Loading = () => {
+    return (
+      
+      <>
+        <h1>Loading</h1>
+      </>
+
+      )
+  }
+
   return (
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
-        <GridContainer>
+        {isLoading && <Loading/>}
+        <GridContainer style={{display: isLoading? "none": "grid"}}>
           <Login>
             <Form onSubmit={handleSubmit}>
               <P>Enter your Twitter Handle</P>
               <Input onChange={(e) => setHandle(e.target.value)} />
-              <Button>Submit</Button>
+              <Button onClick={() => setLoading(true)}>Submit</Button>
             </Form>
           </Login>
           <Display>
@@ -50,7 +63,7 @@ const TwitterHandle = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g id="mention 1" clip-path="url(#clip0)">
+              <g id="mention 1" clipPath="url(#clip0)">
                 <path
                   id="Vector"
                   d="M223.146 445.593H235.406L241.238 398.305L223.144 398.306L223.146 445.593Z"
