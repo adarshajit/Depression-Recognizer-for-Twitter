@@ -13,9 +13,13 @@ import {
 import { IconContext } from "react-icons/lib";
 import Loading from "../../components/LoadingScreen";
 import "./glass.css";
+import TweetError from "../../components/TweetErrorScreen";
+
+
 const Tweet = () => {
   const [tweet, setTweet] = useState("");
   const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const history = useHistory();
 
@@ -30,6 +34,10 @@ const Tweet = () => {
       .then((response) => {
         history.push("/tweetDash", { analysis: response });
         setLoading(false);
+      })
+      .catch((err) => {
+        setError(true)
+        setLoading(false)
       });
     event.preventDefault();
   };
@@ -38,7 +46,8 @@ const Tweet = () => {
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         {isLoading && <Loading />}
-        <GridContainer style={{ display: isLoading ? "none" : "grid" }}>
+        {error && <TweetError />}
+        <GridContainer style={{ display: isLoading || error ? "none" : "grid" }}>
           <Login>
             <Form onSubmit={handleSubmit}>
               <P>Enter your Tweet</P>

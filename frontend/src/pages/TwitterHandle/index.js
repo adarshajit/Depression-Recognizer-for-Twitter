@@ -13,9 +13,13 @@ import {
 import { IconContext } from "react-icons/lib";
 import "./animate.css";
 import Loading from "../../components/LoadingScreen";
+import TwitterHandleError from "../../components/TwitterErrorScreen";
+
+
 const TwitterHandle = () => {
   const [handle, setHandle] = useState("");
   const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const history = useHistory();
 
@@ -30,6 +34,10 @@ const TwitterHandle = () => {
       .then((response) => {
         history.push("/userDash", { analysis: response });
         setLoading(false);
+      })
+      .catch((err) => {
+        setError(true)
+        setLoading(false)
       });
     event.preventDefault();
   };
@@ -38,7 +46,8 @@ const TwitterHandle = () => {
     <>
       <IconContext.Provider value={{ color: "#fff" }}>
         {isLoading && <Loading />}
-        <GridContainer style={{ display: isLoading ? "none" : "grid" }}>
+        {error && <TwitterHandleError />}
+        <GridContainer style={{ display: isLoading || error ? "none" : "grid" }}>
           <Login>
             <Form onSubmit={handleSubmit}>
               <P>Enter your Twitter Handle</P>
