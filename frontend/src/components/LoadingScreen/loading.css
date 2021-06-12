@@ -11,7 +11,6 @@
   top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-left: 30px;
 }
 
 @media screen and (max-width: 768px) {
@@ -20,7 +19,7 @@
     top: 50%;
   }
   .searching {
-    top: 90%;
+    top: 70%;
   }
 }
 
