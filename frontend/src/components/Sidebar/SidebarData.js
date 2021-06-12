@@ -22,10 +22,4 @@ export const SidebarData = [
     icon: <RiIcons.RiQuillPenFill />,
     cName: "nav-text",
   },
-  {
-    title: "Keyword",
-    path: "/keywords",
-    icon: <FaIcons.FaSortAlphaDown />,
-    cName: "nav-text",
-  },
 ];
