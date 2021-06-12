@@ -66,7 +66,7 @@ export const P1 = styled.p`
 export const RecentTweets = styled.div`
   height: 400px;
   background: #24a0f2;
-  border: 5px solid #4692ff;
+  /* border: 5px solid #4692ff; */
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
   /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
