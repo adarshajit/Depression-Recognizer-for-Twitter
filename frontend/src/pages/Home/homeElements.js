@@ -1,12 +1,11 @@
 import styled from "styled-components";
 import { AiOutlineUser as User } from "react-icons/ai";
-import { FaSortAlphaDown as Keywords } from "react-icons/fa";
 import { RiQuillPenFill as Quill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 export const HomeWrapper = styled.div`
   height: 100%;
-  /* background-image: radial-gradient(circle, #ffff, #25a1f2); */
+
   background-image: radial-gradient(
     circle,
     #ffffff,
@@ -137,57 +136,42 @@ export const Box = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 350px;
-    height: 110px;
+    height: 200px;
   }
 
   @media screen and (max-width: 376px) {
     width: 270px;
-    height: 110px;
+    height: 200px;
   }
 `;
 
 export const BoxItems = styled.div`
   display: flex;
   flex-direction: column;
-  align-self: center;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-
-  @media screen and (max-width: 768px) {
-    flex-direction: row;
-  }
 `;
 
 export const UserIcon = styled(User)`
-  margin: 60px 0 40px 0;
+  margin: 50px 0 40px 0;
   align-self: center;
   font-size: 70px;
   fill: #25a1f2;
   @media screen and (max-width: 768px) {
-    margin: 30px 10px 0 40px;
     font-size: 50px;
-  }
-`;
-
-export const KeyIcon = styled(Keywords)`
-  margin: 60px 0 40px 0;
-  align-self: center;
-  font-size: 70px;
-  fill: #25a1f2;
-
-  @media screen and (max-width: 768px) {
-    margin: 30px 10px 0 40px;
-    font-size: 50px;
+    margin-top: 40px;
   }
 `;
 
 export const QuillIcon = styled(Quill)`
-  margin: 60px 0 40px 0;
+  margin: 50px 0 40px 0;
   align-self: center;
   font-size: 70px;
   fill: #25a1f2;
   @media screen and (max-width: 768px) {
-    margin: 30px 10px 0 40px;
     font-size: 50px;
+    margin-top: 40px;
   }
 `;
 export const Text = styled.p`
@@ -199,7 +183,7 @@ export const Text = styled.p`
   color: #00447a;
   width: 100%;
   @media screen and (max-width: 768px) {
-    margin: 25px 0 0 30px;
+    /* margin: 25px 0 0 30px; */
     font-size: 18px;
   }
 `;
