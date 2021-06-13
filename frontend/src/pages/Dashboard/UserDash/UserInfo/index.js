@@ -41,7 +41,7 @@ const UserInfo = ({ stats, tweets }) => {
           <Analytics>
             <P>Analytics</P>
             <StatsWrapper>
-              <H1>{`${(depLevel / 4) * 100}%`}</H1>
+              <H1>{`${Math.floor((depLevel / 4) * 100)}%`}</H1>
 
               <H3>{`The user is ${message} Depressed`}</H3>
             </StatsWrapper>
