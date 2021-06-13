@@ -23,5 +23,7 @@
   font-size: 17px;
   font-weight: 600;
   display: flex;
-  top: 20%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

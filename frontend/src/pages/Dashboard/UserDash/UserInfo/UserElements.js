@@ -19,7 +19,7 @@ export const Analytics = styled.div`
   border-radius: 20px;
   background-image: linear-gradient(to top left, #ffb003, #ffcb03);
   /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
-  @media screen and (min-width: 2000px) {
+  @media screen and (min-width: 1500px) {
     height: 650px;
   }
 `;
@@ -65,7 +65,7 @@ export const RecentTweets = styled.div`
   /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
   border-radius: 20px;
 
-  @media screen and (min-width: 2000px) {
+  @media screen and (min-width: 1500px) {
     height: 650px;
   }
 `;
