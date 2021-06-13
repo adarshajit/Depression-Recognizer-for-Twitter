@@ -21,6 +21,10 @@ class Dashboard extends React.Component {
     };
   }
 
+  componentDidMount() {
+    document.title = "User Analysis from Tweet"
+  }
+
   render() {
     let today = new Date();
     let month = today.getMonth();

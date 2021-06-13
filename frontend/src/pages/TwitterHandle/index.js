@@ -21,6 +21,8 @@ const TwitterHandle = () => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  document.title = "Twitter User"
+
   const history = useHistory();
 
   const handleSubmit = (event) => {

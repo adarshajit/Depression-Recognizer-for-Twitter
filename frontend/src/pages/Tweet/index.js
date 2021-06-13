@@ -21,6 +21,8 @@ const Tweet = () => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  document.title = "Tweet"
+
   const history = useHistory();
 
   const handleSubmit = (event) => {

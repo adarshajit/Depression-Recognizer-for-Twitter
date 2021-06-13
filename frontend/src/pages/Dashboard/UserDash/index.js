@@ -23,6 +23,10 @@ class Dashboard extends React.Component {
     };
   }
 
+  componentDidMount() {
+    document.title = "User Analysis"
+  }
+
   render() {
     let today = new Date();
     let month = today.getMonth();
@@ -57,7 +61,6 @@ class Dashboard extends React.Component {
 
     let date = today.getDate();
 
-    console.log(this.state.analysis);
     return (
       <>
         <MainContainer>
