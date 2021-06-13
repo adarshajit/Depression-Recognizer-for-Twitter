@@ -19,7 +19,7 @@ export const Analytics = styled.div`
   border-radius: 20px;
   background-image: linear-gradient(to top left, #ffb003, #ffcb03);
   /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
-  @media screen and (min-width: 1500px) {
+  @media screen and (min-width: 2000px) {
     height: 650px;
   }
 `;
@@ -65,13 +65,13 @@ export const RecentTweets = styled.div`
   /* box-shadow: 0 8px 16px 0 rgba(31, 38, 135, 0.37); */
   border-radius: 20px;
 
-  @media screen and (min-width: 1500px) {
+  @media screen and (min-width: 2000px) {
     height: 650px;
   }
 `;
 
 export const OtherData = styled.div`
-  margin: 10px;
+  margin: 50px 0 0 0;
 
   grid-column: 1/4;
   border-radius: 10px;

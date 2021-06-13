@@ -12,6 +12,7 @@ import {
 
 import Sidebar from "../../../components/Sidebar";
 import UserInfo from "./UserInfo";
+import Footer from "../../../components/Footer";
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -81,6 +82,7 @@ class Dashboard extends React.Component {
               tweets={this.state.analysis.tweets}
             />
           </Container>
+          <Footer />
         </MainContainer>
       </>
     );
