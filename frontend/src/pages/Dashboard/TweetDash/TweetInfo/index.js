@@ -34,6 +34,22 @@ const TweetInfo = ({ stats }) => {
   } else {
     message = "Highly";
   }
+  if (stats.followers >= 1000000) {
+    stats.followers = String((Math.floor(stats.followers/100000))/10) + "M"
+  } else if (stats.followers >= 1000 && stats.followers < 1000000) {
+    stats.followers = String((Math.floor(stats.followers/100))/10) + "K"
+  }
+  if (stats.followees >= 1000000) {
+    stats.followees = String((Math.floor(stats.followees/100000))/10) + "M"
+  } else if (stats.followees >= 1000 && stats.followees < 1000000) {
+    stats.followees = String((Math.floor(stats.followees/100))/10) + "K"
+  }
+  if (stats.postCount >= 1000000) {
+    stats.postCount = String((Math.floor(stats.postCount/100000))/10) + "M"
+  } else if (stats.postCount >= 1000 && stats.postCount < 1000000) {
+    stats.postCount = String((Math.floor(stats.postCount/100))/10) + "K"
+  }
+  
   return (
     <>
       <IconContext.Provider value={{ fill: "#fff" }}>

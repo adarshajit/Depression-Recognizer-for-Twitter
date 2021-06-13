@@ -7,6 +7,7 @@ import {
   P1,
   TwitterHandle,
   DateWrapper,
+  Img
 } from "./dashboardElements";
 
 import Sidebar from "../../../components/Sidebar";
@@ -64,6 +65,7 @@ class Dashboard extends React.Component {
           <Sidebar />
           <Container>
             <TopWrapper>
+              <Img src={this.state.analysis.profileImage} />
               <TwitterHandle>
                 <H1>{this.state.analysis.name}</H1>
                 <P1>{`@${this.state.analysis.username}`}</P1>
