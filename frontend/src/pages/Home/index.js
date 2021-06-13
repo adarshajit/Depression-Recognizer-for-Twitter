@@ -20,6 +20,9 @@ import {
 import balls1 from "../../assets/ball1.svg";
 import balls2 from "../../assets/ball2.svg";
 const Home = () => {
+
+  document.title = "Depression Recogniser"
+
   return (
     <>
       <HomeWrapper>
