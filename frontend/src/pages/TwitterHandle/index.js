@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   GridContainer,
+  HomeIcon,
   Login,
   P,
   Form,
@@ -15,13 +16,12 @@ import "./animate.css";
 import Loading from "../../components/LoadingScreen";
 import TwitterHandleError from "../../components/TwitterErrorScreen";
 
-
 const TwitterHandle = () => {
   const [handle, setHandle] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  document.title = "Twitter User"
+  document.title = "Twitter User";
 
   const history = useHistory();
 
@@ -38,18 +38,23 @@ const TwitterHandle = () => {
         setLoading(false);
       })
       .catch((err) => {
-        setError(true)
-        setLoading(false)
+        setError(true);
+        setLoading(false);
       });
     event.preventDefault();
   };
 
   return (
     <>
-      <IconContext.Provider value={{ color: "#fff" }}>
+      <IconContext.Provider value={{ color: "#fff", size: "26px" }}>
         {isLoading && <Loading />}
         {error && <TwitterHandleError />}
-        <GridContainer style={{ display: isLoading || error ? "none" : "grid" }}>
+        <a href="/">
+          <HomeIcon />
+        </a>
+        <GridContainer
+          style={{ display: isLoading || error ? "none" : "grid" }}
+        >
           <Login>
             <Form onSubmit={handleSubmit}>
               <P>Enter your Twitter Handle</P>

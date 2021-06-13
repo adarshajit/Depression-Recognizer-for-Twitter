@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as Fa from "react-icons/fa";
 
 export const GridContainer = styled.div`
   display: grid;
@@ -7,6 +8,17 @@ export const GridContainer = styled.div`
 
   @media screen and (max-width: 1024px) {
     grid-template-columns: 1fr;
+  }
+`;
+
+export const HomeIcon = styled(Fa.FaHome)`
+  position: absolute;
+  margin: 20px;
+
+  &:hover {
+    fill: #239afb;
+    transition: 0.3s all ease-in-out;
+    cursor: pointer;
   }
 `;
 
@@ -38,7 +50,7 @@ export const P = styled.p`
 
 export const Textarea = styled.textarea`
   width: 350px;
-  height: 260px;
+  height: 200px;
   border-radius: 5px;
   margin-bottom: 20px;
   padding-left: 10px;

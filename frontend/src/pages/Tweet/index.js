@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   GridContainer,
+  HomeIcon,
   Login,
   P,
   Form,
@@ -15,13 +16,12 @@ import Loading from "../../components/LoadingScreen";
 import "./glass.css";
 import TweetError from "../../components/TweetErrorScreen";
 
-
 const Tweet = () => {
   const [tweet, setTweet] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  document.title = "Tweet"
+  document.title = "Tweet";
 
   const history = useHistory();
 
@@ -38,18 +38,24 @@ const Tweet = () => {
         setLoading(false);
       })
       .catch((err) => {
-        setError(true)
-        setLoading(false)
+        setError(true);
+        setLoading(false);
       });
     event.preventDefault();
   };
 
   return (
     <>
-      <IconContext.Provider value={{ color: "#fff" }}>
+      <IconContext.Provider value={{ color: "#fff", size: "26px" }}>
         {isLoading && <Loading />}
         {error && <TweetError />}
-        <GridContainer style={{ display: isLoading || error ? "none" : "grid" }}>
+        <a href="/">
+          <HomeIcon />
+        </a>
+
+        <GridContainer
+          style={{ display: isLoading || error ? "none" : "grid" }}
+        >
           <Login>
             <Form onSubmit={handleSubmit}>
               <P>Enter your Tweet</P>
