@@ -1,0 +1,52 @@
+.loader {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.searching {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 768px) {
+  .loader {
+    left: 60%;
+    top: 50%;
+  }
+  .searching {
+    top: 70%;
+  }
+}
+
+#MagGlass {
+  animation: look 2.5s infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes look {
+  0% {
+    transform: translateY(0px);
+  }
+
+  10% {
+    transform: translateY(140px);
+  }
+
+  45% {
+    transform: translateX(160px);
+  }
+
+  70% {
+    transform: translateX(-30px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}

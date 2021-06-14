@@ -1,0 +1,32 @@
+.errorImage {
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  height: 240px;
+  width: 240px;
+  transform: translate(-50%, -50%);
+}
+
+.errorText {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.errorButton {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 768px) {
+  .errorText {
+    top: 70%;
+  }
+  .errorButton {
+    top: 90%;
+  }
+}

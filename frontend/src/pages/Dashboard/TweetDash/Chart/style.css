@@ -1,0 +1,72 @@
+.flex-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  position: relative;
+  top: 20%;
+  z-index: 1;
+}
+
+.single-chart {
+  width: 20%;
+  justify-content: space-around;
+}
+
+.circular-chart {
+  display: block;
+  margin: 10px auto;
+  max-width: 80%;
+  max-height: 250px;
+}
+
+@media screen and (max-width: 768px) {
+  .flex-wrapper {
+    align-self: center;
+    justify-content: center;
+  }
+
+  .single-chart {
+    width: 55%;
+  }
+
+  .circular-chart {
+    max-width: 80%;
+    max-height: 300px;
+  }
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.circular-chart.yellow .circle {
+  stroke: rgb(255, 219, 61);
+}
+
+.circular-chart.green .circle {
+  stroke: #4cc790;
+}
+
+.circular-chart.orange .circle {
+  stroke: darkorange;
+}
+
+.percentage {
+  fill: #000;
+  font-size: 0.5em;
+  text-anchor: middle;
+}
