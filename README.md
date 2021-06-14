@@ -34,6 +34,6 @@ List of modules being installed:
 - sklearn
 - Django
 
-and their required dependencies
+and their required dependencies.
 
 Before running the cleaning program make sure to remove first person stop words from the stopwords list of NLTK.
