@@ -13,6 +13,8 @@ The project works to develop a social media-based depression recognition tool us
 
 [sklearn](https://scikit-learn.org/0.21/documentation.html)
 
+[Django](https://www.djangoproject.com/)
+
 
 ## Prerequisites
 
