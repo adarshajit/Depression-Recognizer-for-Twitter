@@ -20,10 +20,10 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn import metrics
 
 
-accessToken = '2210845584-ChruE1rERcvIRGmVTqn3UDvLrW3h9hXtOodu9Ec'
-accessTokenSecret = '3WhULUNaC3Bw98t0osC0iVtYS99fI6Ktd0OozOevVnYD3'
-apiKey = 'H6YCAwHAXnEj9Zi1y3pzCTFNh' 
-apiSecretKey = 'xu2HNuzupwAp0V49Hk3p3RpkxDnuXDFez3TKCpsSeUJlwWnMMZ'
+accessToken = 'yourAccessToken'
+accessTokenSecret = 'yourAccessTokenSecret'
+apiKey = 'yourAPIKey' 
+apiSecretKey = 'yourAPISecretKey'
 
 auth = tw.OAuthHandler(apiKey,apiSecretKey) 
 auth.set_access_token(accessToken,accessTokenSecret) 
